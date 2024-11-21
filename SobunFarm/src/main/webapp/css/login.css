@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+/* 스크롤바 비활성화 */
+body, html {
+  overflow: hidden;
+}
+
+
+/* 공통 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #fff8f1;
+}
+
+
+/* 헤더 스타일 */
+header {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3e898;
+  height: 100px;
+  padding: 10px 100px;
+  position: fixed;
+  width: 100%;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+header .logo span {
+  color: #0fa958;
+  font-size: 33px;
+  font-weight: bolder;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+
+header .login {
+  color: #0fa958;
+  font-size: 24px;
+  font-weight: bolder;
+  white-space: nowrap;
+}
+
+
+header .login span a {
+  text-decoration: none;
+  color: #0fa958;
+}
+
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+
+nav ul li {
+  margin: 0 10px;
+}
+
+
+nav ul li a img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+
+.search-login {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+}
+
+
+.search-login input {
+  padding: 5px;
+  width: 450px;
+  height: 50px;
+  border: 2px solid #e3577a;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+
+.search-login input:focus {
+  outline: none;
+  border: 2px solid #e3577a;
+}
+
+
+.search-login button {
+  position: absolute;
+  margin-left: 385px;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+}
+
+
+.search-login button a img {
+  width: 35px;
+  height: auto;
+}
+
+
+.user img {
+  width: 40px;
+  margin-left: 45px;
+  margin-right: 10px;
+}
+
+
+/* login 스타일 */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.login-form {
+  position: relative;
+  width: 500px;
+  margin: 160px auto;
+  text-align: center;
+}
+
+
+.login-form h1 {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 60px;
+  color: #4b5b12;
+  margin-bottom: 30px;
+}
+
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 500px;
+  height: 60px;
+  margin-bottom: 20px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 3px solid #4b5b12;
+  border-radius: 15px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  color: #777777;
+}
+
+
+.login-form input[type="password"] {
+  margin-bottom: 30px;
+}
+
+
+.login-form button {
+  width: 500px;
+  height: 60px;
+  margin-top: 15px;
+  background: #85a26c;
+  border-radius: 15px;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+
+.signup-link {
+  margin-top: 30px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  color: #000000;
+}
+
+
+.signup-link a {
+  color: #e3577a;
+  text-decoration: none;
+}
+
+/* 에러 메시지 */
+.error-message {
+  color: red;
+  font-size: 18px;
+  min-height: 20px;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: red;
+  font-size: 18px;
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+
+
