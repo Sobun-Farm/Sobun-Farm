@@ -10,7 +10,7 @@ public class User {
     public User() {}
 
     // 모든 필드를 초기화하는 생성자
-    public User(String email, String password, String nickname, String region) {
+    public User(String email, String nickname, String password, String region) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;

@@ -6,12 +6,14 @@ import model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class UserDAO {
 
-    private final String DB_URL = "jdbc:oracle:thin:@localhost:1521/xepdb1"; // Oracle DB URL
-    private final String DB_USER = "scott"; // DB 사용자명
-    private final String DB_PASSWORD = "TIGER"; // DB 비밀번호
+    private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb"; // Oracle DB URL
+    private final String DB_USER = "dbp240201"; // DB 사용자명
+    private final String DB_PASSWORD = "111135"; // DB 비밀번호
 
     public UserDAO() {
         try {
@@ -28,16 +30,39 @@ public class UserDAO {
      * @param user 저장할 사용자 객체
      * @return 저장 성공 여부
      */
+
+    public class PasswordUtils {
+        public static String hashPassword(String password) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                byte[] hash = md.digest(password.getBytes());
+                StringBuilder hexString = new StringBuilder();
+                for (byte b : hash) {
+                    String hex = Integer.toHexString(0xff & b);
+                    if (hex.length() == 1) {
+                        hexString.append('0');
+                    }
+                    hexString.append(hex);
+                }
+                return hexString.toString();
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException("SHA-256 암호화 실패", e);
+            }
+        }
+    }
+    
     public boolean insertUser(User user) {
-    	String sql = "INSERT INTO APPUSER (USERID, EMAIL, NICKNAME, PASSWORD, REGION) " +
+    	String sql = "INSERT INTO APPUSER (USERID, EMAIL, PASSWORD, NICKNAME, REGION) " +
                 "VALUES (APPUSER_SEQ.NEXTVAL, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
+        	
+        	String hashedPassword = PasswordUtils.hashPassword(user.getPassword()); // 비밀번호 암호화
 
             stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getNickname());
-            stmt.setString(3, user.getPassword());
+            stmt.setString(2, hashedPassword);
+            stmt.setString(3, user.getNickname());
             stmt.setString(4, user.getRegion());
 
             int rowsAffected = stmt.executeUpdate();

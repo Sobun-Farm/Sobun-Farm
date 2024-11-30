@@ -111,7 +111,7 @@ public class UserController extends HttpServlet {
         }
 
         // 새로운 사용자 생성 및 등록
-        User newUser = new User(email, password, nickname, region);
+        User newUser = new User(email, nickname, password, region);
         boolean isRegistered = userService.register(newUser);
 
         if (isRegistered) {

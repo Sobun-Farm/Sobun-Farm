@@ -64,9 +64,12 @@ public class UserService {
      */
     public User authenticate(String email, String password) {
         User user = userDAO.findUserByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
-            return user;
+        if (user != null) {
+            String hashedInputPassword = UserDAO.PasswordUtils.hashPassword(password); // 입력된 비밀번호 해싱
+            if (user.getPassword().equals(hashedInputPassword)) { // 해시값 비교
+                return user;
+            }
         }
-        return null;
+        return null; // 인증 실패
     }
 }
