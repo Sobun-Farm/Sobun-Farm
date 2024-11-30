@@ -7,7 +7,8 @@
     <!-- 헤더 파일 포함 -->
     <jsp:include page="/WEB-INF/views/header.jsp" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css" />
-    <link rel="stylesheet" href="css/detail.css" />
+    <!-- <link rel="stylesheet" href="css/detail.css" />  -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css" />
 </head>
 <body>
 
@@ -17,9 +18,9 @@
 		<!-- container 요소 (box1, box2)는 가로 정렬 -->
 		<!-- box1은 상품 이미지와 프로필, 닉네임, 소분 성공 개수, 지역 -->
 		<div class="box1"> 
-			<img src="image/detail_img.png" class="detail_img">
+			<img src="<%=request.getContextPath()%>/image/detail_img.png" class="detail_img">
 			<div class="profile_detail_box">
-				<img src="image/profile_ex.png" class="profile_img">
+				<img src="/image/profile_ex.png" class="profile_img">
 				<div class="profile_detail">
 				월곡라면킬러 (소분 성공: 76개)<br>
 				성북구
@@ -31,9 +32,9 @@
 		
 		<div class="box2-detail1">
     		<div>
-        	<img src="image/gray-triangle.png" id="gray-triangle">
+        	<img src="<%=request.getContextPath()%>/image/gray-triangle.png" id="gray-triangle">
         	식료품
-        	<img src="image/black-triangle.png" id="black-triangle">
+        	<img src="<%=request.getContextPath()%>/image/black-triangle.png" id="black-triangle">
         	<span class="black-text">신라면</span>
     		</div>
     		<div id="count-participant">
@@ -61,7 +62,7 @@
     	</div>
     	
     	<div class="button-container">
-    	<button class="button1" onclick="location.href='<%=request.getContextPath()%>/edit.jsp';">거래 수정</button>
+    	<button class="button1" onclick="location.href='<%=request.getContextPath()%>/edit';">거래 수정</button>
 
     	<button class="button2">거래 파기</button>
     	</div>

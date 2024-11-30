@@ -7,18 +7,18 @@
     <!-- 헤더 파일 포함 -->
     <jsp:include page="/WEB-INF/views/header.jsp" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css" />
-    <link rel="stylesheet" href="css/edit.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/edit.css" />
 </head>
 <body>
     <div class="container">
         <!-- 뒤로가기 버튼 -->
         <div class="back-button-container">
             <button type="button" class="back-button" onclick="history.back()">
-                <img src="image/back-button.png" alt="뒤로가기" />
+                <img src="/image/back-button.png" alt="뒤로가기" />
             </button>
         </div>
 
-        <form action="saveEdit.jsp" method="post" class="edit-form">
+        <form action="<%=request.getContextPath()%>/detail" method="post" class="edit-form">
             <!-- 물품명 -->
             <div class="form-group">
                 <label for="item-name">물품명 <span class="required">*</span></label>
@@ -117,9 +117,9 @@
 
             <!-- 버튼 -->
             <div class="form-buttons">
-                <button type="submit" class="save-button">거래 수정 완료</button>
-                <button type="button" class="start-button" onclick="history.back()">거래 정보 확정</button>
-            </div>
+			    <button type="submit" class="save-button" onclick="history.back()">거래 수정 완료</button>
+ 				<button type="button" class="start-button" onclick="history.back()">거래 정보 확정</button>
+			</div>
         </form>
     </div>
 </body>

@@ -1,0 +1,202 @@
+.detail_img {
+    width: 100%; /* 이미지를 부모 너비에 맞춤 */
+    max-width: 650px; /* 최대 너비 설정 */
+    height: auto; /* 비율 유지 */
+    border-radius: 50px;
+    margin-bottom: 20px; /* 아래 간격 추가 */
+}
+
+.profile_detail_box {
+    display: flex; /* 내부 요소들을 가로로 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    justify-content: space-between; /* 요소 간 간격 확보 */
+    gap: 20px; /* 요소 간 여백 */
+    margin-top: 20px; /* 이미지와 간격 추가 */
+}
+
+.profile_img {
+	margin-top: -13px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* 프로필 이미지를 원형으로 */
+}
+
+.profile_detail {
+    font-size: 1.2rem;
+    line-height: 1.5; /* 텍스트 간 간격 */
+    margin-top: -10px;
+}
+
+.box1 {
+    display: flex;
+    flex-direction: column; /* 요소를 위아래로 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+    align-items: flex-start; /* 왼쪽 끝 정렬 */
+    max-width: 800px; /* 최대 너비 설정 */
+    margin: auto; /* 중앙 정렬 */
+}
+
+.box2 {
+    display: flex;
+    flex-direction: column; /* 내부 요소들을 세로로 정렬 */
+    align-items: flex-start; /* 왼쪽 끝 정렬 */
+    max-width: 600px; /* 최대 너비 설정 */
+    margin: auto; /* 중앙 정렬 */
+    padding: 20px;
+    margin-left: -30px;
+    margin-top: -20px;
+}
+
+.box2-detail1 {
+    display: flex; /* 내부 요소들을 가로로 배치 */
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: space-between; /* 요소 간 간격 유지 */
+    width: 100%; /* 부모의 너비를 유지 */
+    margin-bottom: 20px; /* 아래 간격 추가 */
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 550;
+    font-size: 17px;
+    line-height: 36px;
+    color: #878787;
+}
+
+.box2-detail1 div {
+    display: flex; /* 가로 배치 유지 */
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+#gray-triangle,
+#black-triangle {
+    height: auto;
+    margin-right: 10px;
+}
+
+#black-triangle {
+    margin-left: 10px; /* 신라면과 이미지 간 여백 */
+}
+
+#count-participant {
+    text-align: right; /* 텍스트를 오른쪽 정렬 */
+    display: flex; /* 가로 배치 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+
+#title {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 30px;
+
+color: #000000;
+
+mix-blend-mode: normal;
+
+margin-bottom: 10px;
+margin-top: -10px;
+}
+
+#price {
+	font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 33px;
+/* identical to box height */
+margin-bottom: 10px;
+}
+#deadline {
+	font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 36px;
+margin-bottom: 22px;
+
+color: #878787;
+}
+#detail-info {
+	font-family: 'Inter';
+font-style: normal;
+font-weight: 550;
+font-size: 20px;
+line-height: 33px;
+
+color: #575757;
+
+}
+
+.container {
+    display: flex; /* box1과 box2를 가로로 배치 */
+    justify-content: space-between; /* box1과 box2 간격 설정 */
+    max-width: 1770px;
+    margin: 0 auto;
+    padding-top: 150px; /* 헤더와 겹치지 않도록 여백 추가 */
+    margin-left: 20px;
+}
+
+.button-container {
+    display: flex; /* 버튼을 가로로 정렬 */
+    justify-content: center; /* 버튼들을 중앙에 정렬 */
+    align-items: center; /* 세로 정렬 */
+    gap: 25px; /* 버튼 간 간격 증가 */
+    margin-top: 90px; /* 위쪽 여백 추가 */
+}
+
+.button1, .button2 {
+    width: 270px; /* 버튼 너비 */
+    height: 65px; /* 버튼 높이 */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px; /* 버튼 텍스트 크기 */
+    color: #FFFFFF;
+    background: #E3577A;
+    border: none; /* 외곽선 제거 */
+    border-radius: 20px;
+    text-align: center; /* 텍스트 가운데 정렬 */
+    line-height: 70px; /* 텍스트를 버튼 높이에 맞춰 가운데 정렬 */
+    cursor: pointer; /* 클릭 가능한 상태 표시 */
+}
+
+.line-container {
+    text-align: left; /* 모든 자식 요소를 왼쪽 정렬 */
+}
+
+.line {
+    height: 2px;
+    background-color: #E0E0E0;
+    border: none;
+    margin: 40px 0;
+    width: 95%; /* 선의 길이 */
+    border-radius: 1px;
+    margin-left: -50px;
+}
+
+
+.box-container {
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    justify-content: center; /* 세로 가운데 정렬 */
+    align-items: center; /* 가로 가운데 정렬 */
+    height: 100vh; /* 부모 컨테이너 높이를 기준으로 정렬 */
+}
+
+.detail-form {
+    justify-content: space-between; /* box1과 box2 간격 설정 */
+    max-width: 1770px;
+    margin: 0 auto;
+    margin-left: 120px;
+    margin-bottom: 100px;
+}
+
+.item-detail {
+	font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 36px;
+margin-top: 15px;
+}
