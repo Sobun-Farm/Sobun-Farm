@@ -10,12 +10,12 @@
 <body>
 	<header>
      	 <div class="logo">
-            <a href="#"><img src="image/logo.png" alt="소분팜 로고" width="300" height="auto"></a>
+            <a href="<%=request.getContextPath()%>/user?action=homePage"><img src="image/logo.png" alt="소분팜 로고" width="300" height="auto"></a>
             <span >소분팜</span>
         </div>
         <nav>
             <ul>
-                <li><a href="<%=request.getContextPath()%>/home.jsp"><img src="image/home.png" alt="Home"></a></li>
+                <li><a href="<%=request.getContextPath()%>/user?action=homePage"><img src="image/home.png" alt="Home"></a></li>
                 <li><a href="#"><img src="image/chat.png" alt="Chat"></a></li>
                 <li><a href="#"><img src="image/upload.png" alt="Upload"></a></li>
             </ul>
@@ -28,10 +28,22 @@
             <span><a href="#"><img src="image/user.png" alt="user"></a></span>
         </div>
         <div class="login">
-            <span><a href="<%=request.getContextPath()%>/login.jsp">로그인</a></span>
-            <span> / </span>
-            <span><a href="<%=request.getContextPath()%>/join.jsp">회원가입</a></span>
-        </div>
+		    <% 
+		        // 세션에서 로그인된 사용자 정보 확인
+		        Object loggedInUser = session.getAttribute("loggedInUser");
+		        if (loggedInUser != null) { 
+		    %>
+		        <span><a href="<%=request.getContextPath()%>/user?action=logout">로그아웃</a></span>
+		    <% 
+		        } else { 
+		    %>
+		        <span><a href="<%=request.getContextPath()%>/user?action=loginPage">로그인</a></span>
+		        <span> / </span>
+		        <span><a href="<%=request.getContextPath()%>/user?action=registerPage">회원가입</a></span>
+		    <% 
+		        } 
+		    %>
+		</div>
     </header>
     
     <main>
@@ -108,36 +120,37 @@
 	    <% } %>
 	  </section>
 
-	  <!-- 페이지네이션 -->
-	  <div class="pagination">
+	 <!-- 페이지네이션 -->
+	<div class="pagination">
 	    <!-- 맨 앞으로 이동 버튼 -->
 	    <% if (currentPage > 1) { %>
-	      <a href="?page=1" class="first-page"><<</a>
+	        <a href="<%=request.getContextPath()%>/user?action=homePage&page=1" class="first-page"><<</a>
 	    <% } %>
 	
 	    <!-- 이전 페이지 버튼 -->
 	    <% if (currentPage > 1) { %>
-	      <a href="?page=<%= currentPage - 1 %>" class="prev-page"><</a>
+	        <a href="<%=request.getContextPath()%>/user?action=homePage&page=<%= currentPage - 1 %>" class="prev-page"><</a>
 	    <% } %>
 	
 	    <!-- 페이지 번호 -->
 	    <% 
-	      for (int i = 1; i <= totalPages; i++) { 
-	        String activeClass = (i == currentPage) ? "active" : "";
+	        for (int i = 1; i <= totalPages; i++) { 
+	            String activeClass = (i == currentPage) ? "active" : "";
 	    %>
-	      <a href="?page=<%=i%>" class="<%=activeClass%>"><%=i%></a>
+	        <a href="<%=request.getContextPath()%>/user?action=homePage&page=<%=i%>" class="<%=activeClass%>"><%=i%></a>
 	    <% } %>
 	
 	    <!-- 다음 페이지 버튼 -->
 	    <% if (currentPage < totalPages) { %>
-	      <a href="?page=<%= currentPage + 1 %>" class="next-page">></a>
+	        <a href="<%=request.getContextPath()%>/user?action=homePage&page=<%= currentPage + 1 %>" class="next-page">></a>
 	    <% } %>
 	
 	    <!-- 맨 끝으로 이동 버튼 -->
 	    <% if (currentPage < totalPages) { %>
-	      <a href="?page=<%=totalPages%>" class="last-page">>></a>
+	        <a href="<%=request.getContextPath()%>/user?action=homePage&page=<%=totalPages%>" class="last-page">>></a>
 	    <% } %>
-	  </div><br><br>
+	</div>
+	<br><br>
     </main>
 </body>
 <script>

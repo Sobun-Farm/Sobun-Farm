@@ -11,12 +11,12 @@
 <body>
 	 <header>
      	 <div class="logo">
-            <a href="#"><img src="image/logo.png" alt="소분팜 로고" width="300" height="auto"></a>
+            <a href="<%=request.getContextPath()%>/user?action=homePage"><img src="image/logo.png" alt="소분팜 로고" width="300" height="auto"></a>
             <span >소분팜</span>
         </div>
         <nav>
             <ul>
-                <li><a href="<%=request.getContextPath()%>/home.jsp"><img src="image/home.png" alt="Home"></a></li>
+                <li><a href="<%=request.getContextPath()%>/user?action=homePage"><img src="image/home.png" alt="Home"></a></li>
                 <li><a href="#"><img src="image/chat.png" alt="Chat"></a></li>
                 <li><a href="#"><img src="image/upload.png" alt="Upload"></a></li>
             </ul>
@@ -29,16 +29,18 @@
             <span><a href="#"><img src="image/user.png" alt="user"></a></span>
         </div>
         <div class="login">
-            <span><a href="<%=request.getContextPath()%>/login.jsp">로그인</a></span>
+            <span><a href="<%=request.getContextPath()%>/user?action=loginPage">로그인</a>
+</span>
             <span> / </span>
-            <span><a href="<%=request.getContextPath()%>/join.jsp">회원가입</a></span>
+            <span><a href="<%=request.getContextPath()%>/user?action=registerPage">회원가입</a>
+</span>
         </div>
     </header>
 
     <main>
       <section class="signup-form">
         <h2>회원가입</h2>
-        <form id="signup-form" action="<%=request.getContextPath()%>/register" method="post">
+        <form id="signup-form" action="<%=request.getContextPath()%>/user?action=register" method="post">
           <div class="input-group">
             <input type="email" id="email" name="email" placeholder="이메일" required />
             <button type="button" id="email-check">중복확인</button>

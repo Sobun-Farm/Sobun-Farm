@@ -9,11 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const signupButton = document.getElementById("signup-button");
   const passwordError = document.getElementById("password-error");
 
-  // 더미 데이터 시뮬레이션
-  const dummyEmails = ["test@example.com", "user@example.com"];
-  const dummyNicknames = ["testUser", "exampleUser"];
-
-  // 이메일 중복 확인 함수 (더미 데이터)
+  // 이메일 중복 확인 함수
   function checkEmailDuplicate() {
     const email = emailInput.value.trim();
     if (email === "") {
@@ -21,14 +17,23 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (dummyEmails.includes(email)) {
-      alert("이미 사용 중인 이메일입니다.");
-    } else {
-      alert("사용 가능한 이메일입니다.");
-    }
+    // 서버로 이메일 중복 확인 요청
+    fetch(`user?action=emailCheck&email=${encodeURIComponent(email)}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.available) {
+          alert("사용 가능한 이메일입니다.");
+        } else {
+          alert("이미 사용 중인 이메일입니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("중복 확인 중 오류가 발생했습니다.");
+      });
   }
 
-  // 닉네임 중복 확인 함수 (더미 데이터)
+  // 닉네임 중복 확인 함수
   function checkNicknameDuplicate() {
     const nickname = nicknameInput.value.trim();
     if (nickname === "") {
@@ -36,11 +41,20 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (dummyNicknames.includes(nickname)) {
-      alert("이미 사용 중인 닉네임입니다.");
-    } else {
-      alert("사용 가능한 닉네임입니다.");
-    }
+    // 서버로 닉네임 중복 확인 요청
+    fetch(`user?action=nicknameCheck&nickname=${encodeURIComponent(nickname)}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.available) {
+          alert("사용 가능한 닉네임입니다.");
+        } else {
+          alert("이미 사용 중인 닉네임입니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("중복 확인 중 오류가 발생했습니다.");
+      });
   }
 
   // 모든 필드의 유효성을 실시간으로 검증하는 함수

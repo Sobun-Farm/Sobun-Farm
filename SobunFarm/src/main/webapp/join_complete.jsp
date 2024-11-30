@@ -10,12 +10,12 @@
 <body>
 	<header>
      	 <div class="logo">
-            <a href="#"><img src="image/logo.png" alt="소분팜 로고" width="300" height="auto"></a>
+            <a href="<%=request.getContextPath()%>/user?action=homePage"><img src="image/logo.png" alt="소분팜 로고" width="300" height="auto"></a>
             <span >소분팜</span>
         </div>
         <nav>
             <ul>
-                <li><a href="<%=request.getContextPath()%>/home.jsp"><img src="image/home.png" alt="Home"></a></li>
+                <li><a href="<%=request.getContextPath()%>/user?action=homePage"><img src="image/home.png" alt="Home"></a></li>
                 <li><a href="#"><img src="image/chat.png" alt="Chat"></a></li>
                 <li><a href="#"><img src="image/upload.png" alt="Upload"></a></li>
             </ul>
@@ -28,9 +28,9 @@
             <span><a href="#"><img src="image/user.png" alt="user"></a></span>
         </div>
         <div class="login">
-            <span><a href="<%=request.getContextPath()%>/login.jsp">로그인</a></span>
+            <span><a href="<%=request.getContextPath()%>/user?action=loginPage">로그인</a></span>
             <span> / </span>
-            <span><a href="<%=request.getContextPath()%>/join.jsp">회원가입</a></span>
+            <span><a href="<%=request.getContextPath()%>/user?action=registerPage">회원가입</a></span>
         </div>
     </header>
     
@@ -38,7 +38,7 @@
     <div class="completion-message">
       <h1>회원가입이 완료되었습니다.</h1>
       <p>소분팜과 함께 합리적인 소비를 해보세요!</p><br>
-      <button class="start-button"><a href="<%=request.getContextPath()%>/home.jsp">소분팜 시작하기</a></button>
+      <button class="start-button"><a href="<%=request.getContextPath()%>/user?action=homePage">소분팜 시작하기</a></button>
     </div>
   </main>
 
