@@ -35,6 +35,12 @@ public class UserController implements Controller {
 
             case "homePage":
                 return "/views/home.jsp";
+                
+            case "successPage":
+                return "/user/join_complete.jsp";
+                
+            case "register":
+                    return handleRegistration(request, response);
 
             case "printUsersPage":
                 List<User> users = userManager.getAllUsers();
@@ -54,6 +60,32 @@ public class UserController implements Controller {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
+        }
+    }
+    private String handleRegistration(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String passwordConfirm = request.getParameter("passwordConfirm");
+        String nickname = request.getParameter("nickname");
+        String region = request.getParameter("region");
+
+        if (!password.equals(passwordConfirm)) {
+            request.setAttribute("error", "비밀번호가 일치하지 않습니다.");
+            return "/user/join.jsp";
+        }
+
+        User newUser = new User(email, nickname, password, region);
+
+        try {
+            boolean isRegistered = userManager.register(newUser);
+            if (isRegistered) {
+                return "redirect:/user?action=successPage";
+            } else {
+                request.setAttribute("error", "회원가입 실패: 이메일 또는 닉네임이 이미 존재합니다.");
+                return "/user/join.jsp";
+            }
+        } catch (Exception e) {
+            throw new ServletException("회원가입 처리 중 오류 발생", e);
         }
     }
 }

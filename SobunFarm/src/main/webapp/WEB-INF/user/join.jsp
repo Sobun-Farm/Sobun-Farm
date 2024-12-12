@@ -41,6 +41,7 @@
       <section class="signup-form">
         <h2>회원가입</h2>
         <form id="signup-form" action="<%=request.getContextPath()%>/user?action=register" method="post">
+          <input type="hidden" name="action" value="register">
           <div class="input-group">
             <input type="email" id="email" name="email" placeholder="이메일" required />
             <button type="button" id="email-check">중복확인</button>
