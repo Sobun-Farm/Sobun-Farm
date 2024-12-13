@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+/* 공통 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #fff8f1;
+}
+
+
+/* 헤더 스타일 */
+header {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3e898;
+  height: 100px;
+  padding: 10px 100px;
+  position: fixed;
+  width: 100%;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+header .logo span {
+  color: #0fa958;
+  font-size: 33px;
+  font-weight: bolder;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+
+header .login {
+  color: #0fa958;
+  font-size: 24px;
+  font-weight: bolder;
+  white-space: nowrap;
+}
+
+
+header .login span a {
+  text-decoration: none;
+  color: #0fa958;
+}
+
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+
+nav ul li {
+  margin: 0 10px;
+}
+
+
+nav ul li a img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+
+.search-login {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+}
+
+
+.search-login input {
+  padding: 5px;
+  width: 450px;
+  height: 50px;
+  border: 2px solid #e3577a;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+
+.search-login input:focus {
+  outline: none;
+  border: 2px solid #e3577a;
+}
+
+
+.search-login button {
+  position: absolute;
+  margin-left: 385px;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+}
+
+
+.search-login button a img {
+  width: 35px;
+  height: auto;
+}
+
+
+.user img {
+  width: 40px;
+  margin-left: 45px;
+  margin-right: 10px;
+}
+
+a.product-card {
+   text-decoration: none;
+   color: inherit;
+   display: block; /* 카드처럼 보이도록 설정 */
+}

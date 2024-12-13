@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    padding-top: 120px; /* 헤더와 겹치지 않도록 여백 추가 */
+}
+
+.edit-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 두 열로 배치 */
+    gap: 20px; /* 각 필드 사이의 간격 */
+    max-width: 1000px;
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group .required {
+    color: red; /* '*' 부분을 빨간색으로 설정 */
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 80%; /* 입력 칸 가로 크기 줄임 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 80px;
+}
+
+.form-group.full-width {
+    grid-column: span 2; /* 상세 정보는 두 열을 차지 */
+}
+
+input[readonly] {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.form-buttons {
+    grid-column: span 2; /* 버튼은 두 열을 차지 */
+    display: flex;
+    justify-content: center; /* 버튼을 중앙 정렬 */
+    margin-top: 20px;
+    margin-bottom: 100px;
+    gap: 50px; /* 버튼 간 간격 조정 */
+}
+
+.form-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px; /* 둥근 모서리 줄임 */
+    cursor: pointer;
+    display: flex; /* 중앙 정렬을 위한 flexbox */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    height: 50px; /* 버튼 높이 */
+}
+
+.save-button {
+    background-color: #E3577A;
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px; /* 글자 크기 */
+    width: 200px; /* 버튼 너비 */
+}
+
+.start-button {
+    background-color: #E3577A;
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px; /* 글자 크기 */
+    width: 200px; /* 버튼 너비 */
+}
+
+.back-button-container {
+    margin-bottom: 20px; /* 입력 폼과 간격 추가 */
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    padding-left: 170px;
+}
+
+.back-button img {
+    width: 30px; /* 버튼 이미지 크기 */
+    height: 30px;
+    object-fit: contain;
+}

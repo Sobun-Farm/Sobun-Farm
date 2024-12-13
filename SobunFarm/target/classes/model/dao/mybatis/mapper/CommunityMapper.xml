@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.CommunityMapper">
+	<cache />
+	
+	<insert id="insertCommunity" parameterType="Community">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT commId_seq.nextval AS id FROM DUAL
+		</selectKey>
+				
+		INSERT INTO Community (cId, cName, descr, startDate) 
+		VALUES (#{id}, #{name}, #{description}, SYSDATE)
+	</insert>
+
+	<update id="updateCommunity" parameterType="Community">
+		UPDATE Community 
+		SET cName = #{name}, descr = #{description}, chairId = #{chairId}
+		WHERE cId = #{id}		
+	</update>
+ 
+	<update id="updateChair" parameterType="Community">
+		UPDATE Community 
+		SET chairId = #{chairId, javaType=String, jdbcType=VARCHAR}
+		WHERE cId = #{id}			
+	</update>
+	
+	<delete id="deleteCommunity" parameterType="int">
+		DELETE FROM Community
+		WHERE cId = #{id}
+	</delete>
+
+	<select id="selectCommunityByPrimaryKey" parameterType="int" resultType="Community"> 
+		SELECT cId AS id, 
+		       cName AS name, 
+		       descr AS description, 
+		       chairId, 
+		       u.name As chairName		        
+        FROM Community c LEFT OUTER JOIN UserInfo u ON c.chairId = u.userId         			
+		WHERE c.cId = #{id} 		
+    </select>      
+		
+	<resultMap id="commResultMap" type="Community">
+		<id column="cId" jdbcType="INTEGER" property="id" />
+		<result column="cName" jdbcType="VARCHAR" property="name" />
+		<result column="descr" jdbcType="VARCHAR" property="description" />
+		<result column="startDate" jdbcType="TIME" property="startDate" />
+		<result column="chairId" jdbcType="VARCHAR" property="chairId" />
+		<result column="chairName" jdbcType="VARCHAR" property="chairName" />
+		<collection property="memberList" ofType="User">
+			<id column="userId" jdbcType="VARCHAR" property="userId" />
+			<result column="password" jdbcType="VARCHAR" property="password" />
+			<result column="name" jdbcType="VARCHAR" property="name" />
+			<result column="email" jdbcType="VARCHAR" property="email" />
+			<result column="phone" jdbcType="VARCHAR" property="phone" />
+			<result column="cId" jdbcType="INTEGER" property="commId" />
+			<result column="cName" jdbcType="VARCHAR" property="commName" />
+		</collection>
+	</resultMap>
+ 
+	<select id="selectCommunityWithMembers" parameterType="int" resultMap="commResultMap"> 
+		SELECT cId, 
+			   cName, 
+			   descr, 
+			   startDate, 
+			   chairId, 
+			   ch.name As chairName,
+			   m.userId, 
+			   m.password, 
+			   m.name, 
+			   m.email, 
+			   m.phone
+        FROM Community c LEFT OUTER JOIN UserInfo ch ON c.chairId = ch.userId      
+        			     LEFT OUTER JOIN UserInfo m ON c.cId = m.commId      			
+		WHERE c.cId = #{id} 
+	</select>
+	
+	<select id="selectAllCommunities" resultType="Community">
+		SELECT cId AS id, 
+		       cName AS name, 
+		       descr AS description, 
+		       COUNT(u.userId) AS numOfMembers 
+        FROM Community c LEFT OUTER JOIN UserInfo u 
+        		ON c.cId = u.commId 
+       	GROUP BY cId, cName, descr 
+        ORDER BY cName
+    </select>
+</mapper>
