@@ -33,12 +33,16 @@ public class HomeController implements Controller {
         int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
 
         int offset = (currentPage - 1) * itemsPerPage;
-        List<Item> items = itemDAO.getItemsByPage(region, category, 0, Integer.MAX_VALUE);
+        List<Item> items = itemDAO.getItemsByPage(region, category, offset, itemsPerPage);
 
+        // 요청에 데이터 설정
         request.setAttribute("items", items);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("region", region);
+        request.setAttribute("category", category.replace("%", ""));
 
+        System.out.println("Controller 반환된 아이템 개수: " + items.size());
         return "/views/home.jsp";
     }
 }

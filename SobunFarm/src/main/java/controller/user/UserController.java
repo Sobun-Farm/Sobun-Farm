@@ -16,6 +16,7 @@ import java.util.List;
 import model.exception.UserNotFoundException;
 import model.exception.PasswordMismatchException;
 import model.utils.PasswordUtils;
+import java.net.URLEncoder;
 
 public class UserController implements Controller {
     private UserManager userManager;
@@ -43,7 +44,16 @@ public class UserController implements Controller {
                 return "/user/join.jsp";
 
             case "homePage":
-                return "/views/home.jsp";
+                try {
+                    String encodedRegion = URLEncoder.encode("강남구", "UTF-8");
+                    String encodedCategory = URLEncoder.encode("전체보기", "UTF-8");
+
+                    response.sendRedirect(request.getContextPath() + "/home?region=" + encodedRegion + "&category=" + encodedCategory);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+
                 
             case "successPage":
                 return "/user/join_complete.jsp";

@@ -11,14 +11,13 @@
     </select>
 
     <!-- 페이지별 물품 데이터 조회 -->
-   <select id="getItemsByPage" parameterType="map" resultType="model.domain.Item">
-    SELECT ITEMID, TITLE, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, REGION, CATEGORY
-    FROM ITEM
-    WHERE REGION = #{region}
-      AND CATEGORY LIKE #{category}
-    ORDER BY ITEMID
-</select>
-
-
-
+    <select id="getItemsByPage" parameterType="map" resultType="model.domain.Item">
+        SELECT ITEMID, TITLE, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, REGION, CATEGORY
+        FROM ITEM
+        WHERE REGION = #{region}
+          AND CATEGORY LIKE #{category}
+        ORDER BY ITEMID
+        OFFSET #{offset} ROWS
+        FETCH NEXT #{itemsPerPage} ROWS ONLY
+    </select>
 </mapper>
