@@ -47,7 +47,7 @@
 <main>
     <div class="login-form">
         <h1>LOGIN</h1>
-        <form id="loginForm" action="<%=request.getContextPath()%>/user" method="post">
+        <form id="loginForm" action="<%=request.getContextPath()%>/user?action=login" method="post">
             <input type="hidden" name="action" value="login" />
             <input type="email" name="email" placeholder="이메일" id="email" required />
             <input type="password" name="password" placeholder="비밀번호" id="password" required />

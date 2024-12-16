@@ -10,52 +10,56 @@ document.addEventListener("DOMContentLoaded", function () {
   const passwordError = document.getElementById("password-error");
 
   // 이메일 중복 확인 함수
-  function checkEmailDuplicate() {
+  async function checkEmailDuplicate() {
     const email = emailInput.value.trim();
     if (email === "") {
-      alert("이메일을 입력해주세요.");
+      emailError.textContent = "이메일을 입력해주세요.";
       return;
     }
 
-    // 서버로 이메일 중복 확인 요청
-    fetch(`user?action=emailCheck&email=${encodeURIComponent(email)}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.available) {
-          alert("사용 가능한 이메일입니다.");
-        } else {
-          alert("이미 사용 중인 이메일입니다.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("중복 확인 중 오류가 발생했습니다.");
-      });
+    try {
+      const response = await fetch(`/user?action=emailCheck&email=${encodeURIComponent(email)}`);
+      const data = await response.json();
+
+      if (data.available) {
+        emailError.textContent = "사용 가능한 이메일입니다.";
+        emailError.style.color = "green";
+      } else {
+        emailError.textContent = "이미 사용 중인 이메일입니다.";
+        emailError.style.color = "red";
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      emailError.textContent = "중복 확인 중 오류가 발생했습니다.";
+      emailError.style.color = "red";
+    }
   }
 
   // 닉네임 중복 확인 함수
-  function checkNicknameDuplicate() {
-    const nickname = nicknameInput.value.trim();
-    if (nickname === "") {
-      alert("닉네임을 입력해주세요.");
-      return;
-    }
-
-    // 서버로 닉네임 중복 확인 요청
-    fetch(`user?action=nicknameCheck&nickname=${encodeURIComponent(nickname)}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.available) {
-          alert("사용 가능한 닉네임입니다.");
-        } else {
-          alert("이미 사용 중인 닉네임입니다.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("중복 확인 중 오류가 발생했습니다.");
-      });
-  }
+	async function checkNicknameDuplicate() {
+	  const nickname = nicknameInput.value.trim();
+	  if (nickname === "") {
+	    nicknameError.textContent = "닉네임을 입력해주세요.";
+	    return;
+	  }
+	
+	  try {
+	    const response = await fetch(`/user?action=nicknameCheck&nickname=${encodeURIComponent(nickname)}`);
+	    const data = await response.json();
+	
+	    if (data.available) {
+	      nicknameError.textContent = "사용 가능한 닉네임입니다.";
+	      nicknameError.style.color = "green";
+	    } else {
+	      nicknameError.textContent = "이미 사용 중인 닉네임입니다.";
+	      nicknameError.style.color = "red";
+	    }
+	  } catch (error) {
+	    console.error("Error:", error);
+	    nicknameError.textContent = "중복 확인 중 오류가 발생했습니다.";
+	    nicknameError.style.color = "red";
+	  }
+	}
 
   // 모든 필드의 유효성을 실시간으로 검증하는 함수
   function validateForm() {

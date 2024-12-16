@@ -22,12 +22,8 @@ public class UserDAO {
             throw new RuntimeException("Oracle JDBC 드라이버 로드 실패", e);
         }
     }
-    /**
-     * 사용자 정보 저장
-     *
-     * @param user 저장할 사용자 객체
-     * @return 저장 성공 여부
-     */
+ 
+    // 유저 디비에 저장
     public boolean insertUser(User user) {
         String sql = "INSERT INTO APPUSER (USERID, EMAIL, PASSWORD, NICKNAME, REGION) " +
                 "VALUES (APPUSER_SEQ.NEXTVAL, ?, ?, ?, ?)";
@@ -51,12 +47,8 @@ public class UserDAO {
         }
     }
     
-    /**
-     * 사용자 정보 업데이트
-     *
-     * @param user 업데이트할 사용자 객체
-     * @return 업데이트 성공 여부
-     */
+    
+    // 유저 정보 업데이트
     public boolean update(User user) {
         String sql = "UPDATE APPUSER SET EMAIL = ?, PASSWORD = ?, NICKNAME = ?, REGION = ? WHERE EMAIL = ?";
 
@@ -77,12 +69,8 @@ public class UserDAO {
             throw new RuntimeException("사용자 업데이트 중 오류 발생", e);
         }
     }
-    /**
-     * 사용자 삭제
-     *
-     * @param userId 삭제할 사용자 ID
-     * @return 삭제 성공 여부
-     */
+  
+    // 유저 삭제
     public boolean remove(String userId) {
         String sql = "DELETE FROM APPUSER WHERE USERID = ?";
 
@@ -98,12 +86,7 @@ public class UserDAO {
         }
     }
 
-    /**
-     * 이메일 중복 여부 확인
-     *
-     * @param email 확인할 이메일
-     * @return 중복 여부 (true: 중복, false: 중복 아님)
-     */
+    // 이메일 중복여부 확인
     public boolean isEmailExists(String email) {
         String sql = "SELECT COUNT(*) FROM APPUSER WHERE email = ?";
 
@@ -122,12 +105,8 @@ public class UserDAO {
 
         return false;
     }
-    /**
-     * 닉네임 중복 여부 확인
-     *
-     * @param nickname 확인할 닉네임
-     * @return 중복 여부 (true: 중복, false: 중복 아님)
-     */
+
+    // 닉네임 중복여부 확인
     public boolean isNicknameExists(String nickname) {
         String sql = "SELECT COUNT(*) FROM APPUSER WHERE nickname = ?";
 
@@ -146,11 +125,8 @@ public class UserDAO {
 
         return false;
     }
-    /**
-     * 모든 사용자 데이터를 반환
-     *
-     * @return 사용자 데이터 List
-     */
+ 
+    // 모든 사용자 데이터 반환
     public List<User> getAllUsers() {
         String sql = "SELECT * FROM APPUSER";
         List<User> users = new ArrayList<>();
@@ -173,12 +149,9 @@ public class UserDAO {
         }
 
         return users;
-    } /**
-     * 이메일로 사용자 찾기
-    *
-    * @param email 이메일 주소
-    * @return 사용자 객체 (없을 경우 null)
-    */
+    } 
+    
+   // 이메일로 사용자 찾기
    public User findUserByEmail(String email) {
        String sql = "SELECT * FROM APPUSER WHERE email = ?";
 
@@ -202,11 +175,8 @@ public class UserDAO {
 
        return null;
    }
-   /**
-    * 사용자 ID로 사용자 찾기
-    * @param userId 사용자 ID
-    * @return 사용자 객체 (없을 경우 null)
-    */
+
+   // userId로 사용자 찾기
    public User findUser(String userId) {
        String sql = "SELECT * FROM APPUSER WHERE USERID = ?";
 
@@ -230,4 +200,6 @@ public class UserDAO {
 
        return null;
    }
+   
+  
 }

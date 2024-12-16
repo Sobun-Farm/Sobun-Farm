@@ -12,7 +12,9 @@
     WHERE EMAIL = #{email}
 </select>
     <select id="isNicknameExists" parameterType="string" resultType="int">
-    SELECT COUNT(*) FROM APPUSER WHERE NICKNAME = #{nickname}
+    SELECT COUNT(*) 
+    FROM APPUSER 
+    WHERE NICKNAME = #{nickname}
 </select>
 
     <!-- Select query -->

@@ -8,8 +8,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.util.List;
+import model.exception.UserNotFoundException;
+import model.exception.PasswordMismatchException;
+import model.utils.PasswordUtils;
 
 public class UserController implements Controller {
     private UserManager userManager;
@@ -29,6 +35,9 @@ public class UserController implements Controller {
         switch (action) {
             case "loginPage":
                 return "/user/login.jsp";
+                
+            case "login":
+                return handleLogin(request, response);
 
             case "registerPage":
                 return "/user/join.jsp";
@@ -40,7 +49,13 @@ public class UserController implements Controller {
                 return "/user/join_complete.jsp";
                 
             case "register":
-                    return handleRegistration(request, response);
+                 return handleRegistration(request, response);
+                 
+            case "nicknameCheck":   
+                 return handleNicknameCheck(request, response);
+                    
+            case "emailCheck":
+            	 return handleEmailCheck(request, response);
 
             case "printUsersPage":
                 List<User> users = userManager.getAllUsers();
@@ -56,12 +71,15 @@ public class UserController implements Controller {
         }
     }
 
+    // 로그아웃
     private void handleLogout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
     }
+    
+    // 회원가입
     private String handleRegistration(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -74,7 +92,11 @@ public class UserController implements Controller {
             return "/user/join.jsp";
         }
 
-        User newUser = new User(email, nickname, password, region);
+        // 비밀번호 해시화
+        String hashedPassword = PasswordUtils.hashPassword(password);
+
+        // 해시화된 비밀번호를 포함하여 User 객체 생성
+        User newUser = new User(email, nickname, hashedPassword, region);
 
         try {
             boolean isRegistered = userManager.register(newUser);
@@ -88,4 +110,54 @@ public class UserController implements Controller {
             throw new ServletException("회원가입 처리 중 오류 발생", e);
         }
     }
+
+    
+    // 로그인
+    private String handleLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        try {
+            userManager.login(email, password);
+
+            // 세션에 로그인 정보 저장
+            HttpSession session = request.getSession();
+            session.setAttribute("loggedInUser", email);
+
+            return "redirect:/user?action=homePage";
+        } catch (UserNotFoundException | PasswordMismatchException e) {
+            // 로그인 실패 시 처리
+            request.setAttribute("loginFailed", true);
+            request.setAttribute("exception", e);
+            return "/user/login.jsp";
+        }
+    }
+
+    // 이메일 중복체크
+    private String handleEmailCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String email = request.getParameter("email");
+        boolean exists = userManager.isEmailExists(email);
+
+        JsonObject jsonResponse = new JsonObject();  
+        jsonResponse.addProperty("available", !exists);
+
+        response.setContentType("application/json");
+        response.getWriter().write(jsonResponse.toString());
+        return null; // JSON 응답만 반환
+    }
+    
+    // 닉네임 중복체크
+    private String handleNicknameCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String nickname = request.getParameter("nickname");
+        boolean exists = userManager.isNicknameExists(nickname);
+
+        JsonObject jsonResponse = new JsonObject();
+        jsonResponse.addProperty("available", !exists);
+
+        response.setContentType("application/json");
+        response.getWriter().write(jsonResponse.toString());
+        return null;
+    }
+
+
 }
