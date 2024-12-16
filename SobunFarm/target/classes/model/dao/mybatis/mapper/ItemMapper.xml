@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.ItemMapper">
+
+    <!-- 전체 물품 수 조회 -->
+    <select id="getTotalItemCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) 
+        FROM ITEM 
+        WHERE REGION = #{region} 
+          AND CATEGORY LIKE #{category}
+    </select>
+
+    <!-- 페이지별 물품 데이터 조회 -->
+   <select id="getItemsByPage" parameterType="map" resultType="model.domain.Item">
+    SELECT ITEMID, TITLE, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, REGION, CATEGORY
+    FROM ITEM
+    WHERE REGION = #{region}
+      AND CATEGORY LIKE #{category}
+    ORDER BY ITEMID
+</select>
+
+
+
+</mapper>

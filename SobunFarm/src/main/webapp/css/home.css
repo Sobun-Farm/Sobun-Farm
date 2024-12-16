@@ -217,6 +217,18 @@ main {
   font-weight: bold;
 }
 
+.filter-submit-button {
+  background-color: #ccc;
+  color: white;
+   padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+}
+
 .category-button.selected {
   border-color: #333;
 }
