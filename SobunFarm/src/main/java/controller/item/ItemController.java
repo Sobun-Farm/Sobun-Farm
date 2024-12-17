@@ -5,6 +5,14 @@ import model.dao.mybatis.ItemDAO;
 import model.domain.Item;
 import model.dto.ItemDTO;
 
+import model.dao.mybatis.ItemGroupDAO;
+import model.dao.mybatis.TransactionDAO;
+import model.dao.mybatis.ChatDAO;
+
+import model.domain.ItemGroup;
+import model.domain.Transaction;
+import model.domain.Chat;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
@@ -16,7 +24,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @MultipartConfig // 파일 업로드를 처리하기 위해 추가
 public class ItemController implements Controller {
-    private final ItemDAO itemDAO = new ItemDAO(); // DAO 인스턴스 생성
+	 private final ItemDAO itemDAO = new ItemDAO(); // DAO 인스턴스 생성
+	 private final ItemGroupDAO itemGroupDAO = new ItemGroupDAO();
+	 private final TransactionDAO transactionDAO = new TransactionDAO();
+	 private final ChatDAO chatDAO = new ChatDAO();
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -146,6 +158,21 @@ public class ItemController implements Controller {
             Long itemId = itemDAO.getItemId();  // 이 값이 바로 시퀀스 값
             
             System.out.println("등록된 itemId: " + itemId);  // 디버깅용 로그
+            
+            // 아이템 그룹 등록
+            ItemGroup itemGroup = new ItemGroup(itemId);
+            itemGroupDAO.insertItemGroup(itemGroup);
+            System.out.println("등록된 itemGroup itemId: " + itemGroup.getItemId());
+
+            // 트랜잭션 등록
+            Transaction transaction = new Transaction(itemId);
+            transactionDAO.insertTransaction(transaction);
+            System.out.println("등록된 Transaction itemId: " + transaction.getItemId());
+
+            // 챗 등록
+            Chat chat = new Chat(itemId);
+            chatDAO.createChatRoom(chat);
+            System.out.println("등록된 Chat itemId: " + chat.getItemId());
             		
             response.sendRedirect(request.getContextPath() + "/home");
             return null;

@@ -1,31 +1,21 @@
 package model.dao.mybatis;
 
 import model.domain.Transaction;
-import model.utils.MyBatisSessionFactory;
+import model.dao.mybatis.mapper.TransactionMapper;
 import org.apache.ibatis.session.SqlSession;
+import model.utils.MyBatisUtils;
 
 public class TransactionDAO {
 
+    // 트랜잭션 등록
     public void insertTransaction(Transaction transaction) {
-        SqlSession session = null;
-        try {
-            // SqlSession을 MyBatisSessionFactory로부터 생성
-            session = MyBatisSessionFactory.getSqlSession();
-            
-            // Transaction을 MyBatis Mapper를 통해 삽입
-            session.insert("mapper.TransactionMapper.insertTransaction", transaction);
-            
-            // 커밋
-            session.commit();
+        try (SqlSession session = MyBatisUtils.getSqlSession()) {
+        	TransactionMapper mapper = session.getMapper(TransactionMapper.class);
+            // TransactionMapper를 통해 insert 실행
+            mapper.insertTransaction(transaction);  // MyBatis 매퍼의 insertTransaction 호출
+            session.commit(); // 커밋
         } catch (Exception e) {
-            if (session != null) {
-                session.rollback(); // 예외 발생 시 롤백
-            }
             throw new RuntimeException("Transaction 등록 중 오류 발생", e);
-        } finally {
-            if (session != null) {
-                session.close(); // 세션 종료
-            }
         }
     }
 }
