@@ -23,11 +23,11 @@ public class Item {
     private String transactionTime;     // 거래 시간 추가
 
     // 생성자
-    public Item(long itemId, String title, String itemName, double price, int participantsCount,
+    public Item(String title, String itemName, double price, int participantsCount,
                 int maxParticipant, boolean isJoinable, String region, String category,
                 String description, Date deadline, String itemStatus, long userId,
                 String purchaseLocation, String fileName, String fileRealName, String transactionLocation, String transactionTime) {
-        this.itemId = itemId;
+        //this.itemId = itemId;
         this.title = title;
         this.itemName = itemName;
         this.price = price;

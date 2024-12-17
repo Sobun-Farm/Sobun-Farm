@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="model.dao.mybatis.mapper.ChatMapper">
+
+    <!-- 채팅방 목록 조회 -->
+    <select id="findChatRoomsByUser" resultType="model.domain.Chat">
+        SELECT c.chatId, c.itemId, c.lastMessage, c.lastMessageTime
+        FROM Chat c
+        JOIN ItemGroup ig ON c.itemId = ig.itemId
+        WHERE ig.userId = #{userId}
+           OR #{userId} IN (SELECT userId FROM Participation WHERE itemId = ig.itemId)
+        ORDER BY c.lastMessageTime DESC
+    </select>
+
+    <!-- 채팅방 생성 -->
+    <insert id="createChatRoom" parameterType="model.domain.Chat">
+        INSERT INTO Chat (itemId) VALUES (#{itemId})
+    </insert>
+
+    <!-- 마지막 메시지 업데이트 -->
+    <update id="updateLastMessage">
+        UPDATE Chat
+        SET lastMessage = #{lastMessage}, lastMessageTime = CURRENT_TIMESTAMP
+        WHERE chatId = #{chatId}
+    </update>
+
+</mapper>

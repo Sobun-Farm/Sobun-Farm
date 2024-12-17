@@ -142,6 +142,11 @@ public class ItemController implements Controller {
 
             // DAO를 통해 DB에 저장
             itemDAO.insertItem(item);
+            // itemId를 가져와서 필요한 후속 작업
+            Long itemId = itemDAO.getItemId();  // 이 값이 바로 시퀀스 값
+            
+            System.out.println("등록된 itemId: " + itemId);  // 디버깅용 로그
+            		
             response.sendRedirect(request.getContextPath() + "/home");
             return null;
 

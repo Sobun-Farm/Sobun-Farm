@@ -43,14 +43,24 @@ public class ItemDAO {
        }
    }
 
-   public void insertItem(Item item) {
+   public Long insertItem(Item item) {
 	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
 	        ItemMapper mapper = session.getMapper(ItemMapper.class);
 	        mapper.insertItem(item);
 	        session.commit(); // 데이터 삽입 후 커밋
+	        
+	        return item.getItemId(); 
+	        
 	    } catch (Exception e) {
 	        throw new RuntimeException("Item 삽입 중 오류 발생", e);
 	    }
 	}
-
+   
+   public Long getItemId() {
+	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
+	        return session.selectOne("model.dao.mybatis.mapper.ItemMapper.getItemId");
+	    } catch (Exception e) {
+	        throw new RuntimeException("Item ID 조회 중 오류 발생", e);
+	    }
+	}
 }
