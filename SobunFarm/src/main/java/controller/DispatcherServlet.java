@@ -30,10 +30,20 @@ public class DispatcherServlet extends HttpServlet {
     			request.getMethod(), request.getRequestURI(), request.getServletPath());
     	String contextPath = request.getContextPath();
     	String servletPath = request.getServletPath();
+    	//나희 추가 확인용
+    	System.out.println("요청 경로: " + servletPath);
     	
     	// URL 중 servletPath에 대응되는 controller를 구함
         Controller controller = rm.findController(servletPath);
         try {
+        	//나희 추가 확인용
+        	if (controller == null) {
+        	    System.out.println("Controller가 null입니다. 요청 경로: " + servletPath);
+        	    throw new ServletException("요청 경로에 해당하는 Controller를 찾을 수 없습니다: "
+        	    + servletPath);
+        	    
+        	}
+        	
         	// controller를 통해 request 처리 후, 이동할 uri를 반환 받음
             String uri = controller.execute(request, response);
             

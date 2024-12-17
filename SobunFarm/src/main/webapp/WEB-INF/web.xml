@@ -7,36 +7,45 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
   <display-name>Archetype Created Web Application</display-name>
-   <filter>
-      <filter-name>Resource Filter</filter-name>
-      <filter-class>filter.ResourceFilter</filter-class>
-   </filter>
-   <filter>
-      <filter-name>Encoding Filter</filter-name>
-      <filter-class>filter.EncodingFilter</filter-class>
-      <init-param>
-         <param-name>encoding</param-name>
-         <param-value>utf-8</param-value>
-      </init-param>
-   </filter>
-   <filter-mapping>
-      <filter-name>Resource Filter</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping>
-   <filter-mapping>
-      <filter-name>Encoding Filter</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping>
-   <servlet>
-      <servlet-name>DispatcherServlet</servlet-name>
-      <servlet-class>controller.DispatcherServlet</servlet-class>
-      <load-on-startup>1</load-on-startup>
-   </servlet>
-   <servlet-mapping>
-      <servlet-name>DispatcherServlet</servlet-name>
-      <url-pattern>/</url-pattern>
-   </servlet-mapping>
-   <welcome-file-list>
-      <welcome-file>index.jsp</welcome-file>
-   </welcome-file-list>
+	<filter>
+		<filter-name>Resource Filter</filter-name>
+		<filter-class>filter.ResourceFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>Encoding Filter</filter-name>
+		<filter-class>filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Resource Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>controller.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- 나희 추가 -->
+	<session-config>
+    <session-timeout>120</session-timeout> <!-- 30분 -->
+	</session-config>
+	
+	
+	
 </web-app>
