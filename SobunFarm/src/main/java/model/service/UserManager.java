@@ -11,22 +11,22 @@ import model.dao.mybatis.UserDAO;
 import model.utils.PasswordUtils;
 
 public class UserManager {
-	 private static UserManager instance;
-	    private UserDAO userDao;
+    private static UserManager instance;
+       private UserDAO userDao;
 
-	    private UserManager() {
-	        userDao = new UserDAO();
-	    }
+       private UserManager() {
+           userDao = new UserDAO();
+       }
 
-	    public static UserManager getInstance() {
-	        if (instance == null) {
-	            instance = new UserManager();
-	        }
-	        return instance;
-	    }
+       public static UserManager getInstance() {
+           if (instance == null) {
+               instance = new UserManager();
+           }
+           return instance;
+       }
 
 
-	// 회원가입
+   // 회원가입
     public boolean register(User user) {
         try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -74,9 +74,10 @@ public class UserManager {
         }
     }
 
+    //수정
     
     // 로그인
-    public void login(String email, String password) throws UserNotFoundException, PasswordMismatchException {
+    public User login(String email, String password) throws UserNotFoundException, PasswordMismatchException {
         // 이메일로 사용자 조회
         User user = userDao.findUserByEmail(email);
 
@@ -88,6 +89,7 @@ public class UserManager {
         if (!PasswordUtils.checkPassword(password, user.getPassword())) {
             throw new PasswordMismatchException("Invalid password for email: " + email);
         }
+        return user;
     }
 
 

@@ -137,6 +137,8 @@ public class UserDAO {
 
             while (rs.next()) {
                 User user = new User(
+                //나희 추가
+                   rs.getLong("userId"),
                     rs.getString("email"),
                     rs.getString("nickname"),
                     rs.getString("password"),
@@ -163,6 +165,8 @@ public class UserDAO {
 
            if (rs.next()) {
                return new User(
+                     //나희 추가
+                  rs.getLong("userId"),
                    rs.getString("email"),
                    rs.getString("nickname"),
                    rs.getString("password"),
@@ -188,6 +192,8 @@ public class UserDAO {
 
            if (rs.next()) {
                return new User(
+                     //나희 추가
+                  rs.getLong("userId"),
                    rs.getString("email"),
                    rs.getString("nickname"),
                    rs.getString("password"),

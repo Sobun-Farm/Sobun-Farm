@@ -17,6 +17,8 @@ import model.exception.UserNotFoundException;
 import model.exception.PasswordMismatchException;
 import model.utils.PasswordUtils;
 import java.net.URLEncoder;
+//나희 추가
+import model.domain.User;
 
 public class UserController implements Controller {
     private UserManager userManager;
@@ -65,7 +67,7 @@ public class UserController implements Controller {
                  return handleNicknameCheck(request, response);
                     
             case "emailCheck":
-            	 return handleEmailCheck(request, response);
+                return handleEmailCheck(request, response);
 
             case "printUsersPage":
                 List<User> users = userManager.getAllUsers();
@@ -91,6 +93,9 @@ public class UserController implements Controller {
     
     // 회원가입
     private String handleRegistration(HttpServletRequest request, HttpServletResponse response) throws Exception {
+       //수정
+       String userIdStr = request.getParameter("userId");
+       Long userId = userIdStr != null ? Long.valueOf(userIdStr) : null;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("passwordConfirm");
@@ -106,7 +111,7 @@ public class UserController implements Controller {
         String hashedPassword = PasswordUtils.hashPassword(password);
 
         // 해시화된 비밀번호를 포함하여 User 객체 생성
-        User newUser = new User(email, nickname, hashedPassword, region);
+        User newUser = new User(userId, email, nickname, hashedPassword, region);
 
         try {
             boolean isRegistered = userManager.register(newUser);
@@ -128,12 +133,20 @@ public class UserController implements Controller {
         String password = request.getParameter("password");
 
         try {
+           //나희 추가
+           User user = userManager.login(email, password);
+           if (user == null || user.getUserId() == null) {
+                throw new UserNotFoundException("사용자를 찾을 수 없습니다.");
+            }
+           
             userManager.login(email, password);
 
             // 세션에 로그인 정보 저장
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", email);
-
+            //나희 추가
+            session.setAttribute("userId", user.getUserId());
+            
             return "redirect:/user?action=homePage";
         } catch (UserNotFoundException | PasswordMismatchException e) {
             // 로그인 실패 시 처리
@@ -146,15 +159,24 @@ public class UserController implements Controller {
     // 이메일 중복체크
     private String handleEmailCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String email = request.getParameter("email");
-        boolean exists = userManager.isEmailExists(email);
+        System.out.println("이메일 중복 확인 요청: " + email); // 로그 추가
 
-        JsonObject jsonResponse = new JsonObject();  
-        jsonResponse.addProperty("available", !exists);
+        JsonObject jsonResponse = new JsonObject();
+        try {
+            boolean exists = userManager.isEmailExists(email);
+            System.out.println("이메일 존재 여부: " + exists);
+            jsonResponse.addProperty("available", !exists);
+        } catch (Exception e) {
+            e.printStackTrace(); // 서버 콘솔에 예외 출력
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            jsonResponse.addProperty("error", "서버 오류가 발생했습니다.");
+        }
 
         response.setContentType("application/json");
         response.getWriter().write(jsonResponse.toString());
-        return null; // JSON 응답만 반환
+        return null;
     }
+
     
     // 닉네임 중복체크
     private String handleNicknameCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -168,6 +190,4 @@ public class UserController implements Controller {
         response.getWriter().write(jsonResponse.toString());
         return null;
     }
-
-
 }
