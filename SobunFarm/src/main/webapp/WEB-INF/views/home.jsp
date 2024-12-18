@@ -71,11 +71,19 @@
            List<Item> items = (List<Item>) request.getAttribute("items");
            if (items != null && !items.isEmpty()) {
                for (Item item : items) {
+            	   //이 부분 추가, a태그 내부 수정
+            	   long itemId = item.getItemId();
+            	   System.out.println("itemId는 " + itemId);
+            	   request.setAttribute("itemId", itemId);
+            	   
                    String defaultImagePath = request.getContextPath() + "/images/default-image.png";
        %>
                    <div class="product-card">
-                   <a href="${pageContext.request.contextPath}/detail?itemId=${item.itemId}">
-                       <img src="${pageContext.request.contextPath}/images/default_item.png" alt="상품 이미지" class="product-image">
+                   <!-- item.getItemId() 이 부분 수정함 -->
+                   <a href="${pageContext.request.contextPath}/detail?itemId=${ itemId }">
+                      <!-- 하연수정 -->
+                       <img src="<%= request.getContextPath() + "/uploaded/" + (item.getFileRealName() != null ? item.getFileRealName() : "default_item.png") %>" 
+                       alt="상품 이미지" class="product-image">
                    </a>    
                        <h3><%=item.getTitle()%></h3>
                        <p>가격: <%=item.getPrice()%>원</p>

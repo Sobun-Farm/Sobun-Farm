@@ -1,7 +1,6 @@
 .detail_img {
-    width: 100%; /* 이미지를 부모 너비에 맞춤 */
-    max-width: 650px; /* 최대 너비 설정 */
-    height: auto; /* 비율 유지 */
+    width: 550px; /* 고정된 너비 */
+    height: 380px; /* 고정된 높이 */
     border-radius: 50px;
     margin-bottom: 20px; /* 아래 간격 추가 */
 }

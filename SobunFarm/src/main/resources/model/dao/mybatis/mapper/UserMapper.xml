@@ -25,4 +25,10 @@
 <select id="getAllUsers" resultType="model.domain.User">
     SELECT * FROM APPUSER
 </select>
+
+<!-- 추가 -->
+<select id="getUserById" resultType="model.domain.User" parameterType="long">
+    SELECT * FROM APPUSER WHERE USERID = #{userId}
+</select>
+
 </mapper>

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.domain.Item" %>
+<%@ page import="model.domain.User" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +18,19 @@
 		<!-- container 요소 (box1, box2)는 가로 정렬 -->
 		<!-- box1은 상품 이미지와 프로필, 닉네임, 소분 성공 개수, 지역 -->
 		<div class="box1"> 
-			<img src="<%=request.getContextPath()%>/images/detail_img.png" class="detail_img">
+			<%
+    		Item item = (Item) request.getAttribute("item");
+			User user = (User) request.getAttribute("user");
+			int perPersonPrice = (int) (item.getPrice() / item.getMaxParticipant());
+			int price = (int) (item.getPrice());
+			%>
+			
+			<img src="<%= request.getContextPath() + "/uploaded/" + (item.getFileRealName() != null ? item.getFileRealName() : "default_item.png") %>" class="detail_img">
 			<div class="profile_detail_box">
 				<img src="<%=request.getContextPath()%>/images/profile_ex.png" class="profile_img">
 				<div class="profile_detail">
-				월곡라면킬러 (소분 성공: 76개)<br>
-				성북구
+				<%= user.getNickname() %> <!-- (소분 성공: 76개) --><br>
+				<%= user.getRegion() %>
 				</div>
 			</div>
 		</div>
@@ -30,38 +40,36 @@
 		<div class="box2-detail1">
     		<div>
         	<img src="<%=request.getContextPath()%>/images/gray-triangle.png" id="gray-triangle">
-        	식료품
+        	<%= item.getCategory() %>
         	<img src="<%=request.getContextPath()%>/images/black-triangle.png" id="black-triangle">
-        	<span class="black-text">신라면</span>
+        	<span class="black-text"><%= item.getItemName() %></span>
     		</div>
     		<div id="count-participant">
-        	참여 인원 2/3 (명)
+        	참여 인원 <%= item.getParticipantsCount() %>/<%= item.getMaxParticipant() %> (명)
     		</div>
     	</div>
     	
     	<div id="title">
-    	신라면(컵)박스로 구매해서 10개씩 나누실 분 구합니다!
+    	<%= item.getTitle() %>
     	</div>
     	
     	<div id="price">
-    	인당 7,000원 (총 21,000원)
+    	인당 <%= perPersonPrice %>원 (총 <%= price %>원)
     	</div>
     	
     	<div id="deadline">
-    	마감일 2025년 1월 2일
+    	마감일 <%= item.getDeadline() %>
     	</div>
     	
     	<div id="detail-info">
-    	￭ 구매 장소	&nbsp; &nbsp; &nbsp;	쿠팡<br>
-		￭ 거래 장소	&nbsp; &nbsp; &nbsp;	미정<br>
-		￭ 거래 날짜	&nbsp; &nbsp; &nbsp;	미정<br>
-		￭ 거래 시간	&nbsp; &nbsp; &nbsp;	미정
+    	￭ 구매 장소	&nbsp; &nbsp; &nbsp;	<%= item.getPurchaseLocation() %><br>
+		￭ 거래 장소	&nbsp; &nbsp; &nbsp;	<%= item.getTransactionLocation() %><br>
+		￭ 거래 시간	&nbsp; &nbsp; &nbsp;	<%= item.getTransactionTime() %>
     	</div>
     	
     	<div class="button-container">
-    	<button class="button1" onclick="location.href='<%=request.getContextPath()%>/edit';">거래 수정</button>
-
-    	<button class="button2">거래 파기</button>
+    	
+    	<button class="button2">거래 시작</button>
     	</div>
     	
 		</div>
@@ -75,9 +83,7 @@
 
 	<h1>상세 설명</h1>
 	<div class = "item-detail">
-	쿠팡에서 라면 사서 나누실 분 구해요~ <br>
-	시간, 장소 조율해서 가능합니다~ <br>
-	소분 장소는 동덕여대 주변에서 거래 가능하신 분들 위주면 좋겠네요. <br>
+	<%= item.getDescription() %>
 	</div>
 	</div>
 	

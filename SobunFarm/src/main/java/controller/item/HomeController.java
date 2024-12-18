@@ -1,12 +1,15 @@
 package controller.item;
 
 import model.dao.mybatis.ItemDAO;
+
 import model.domain.Item;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import controller.Controller;
+import javax.servlet.http.HttpSession;
 
 public class HomeController implements Controller {
     private ItemDAO itemDAO = new ItemDAO();
@@ -43,6 +46,9 @@ public class HomeController implements Controller {
         request.setAttribute("category", category.replace("%", ""));
 
         System.out.println("Controller 반환된 아이템 개수: " + items.size());
+        
+        
+        
         return "/views/home.jsp";
     }
 }

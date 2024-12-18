@@ -17,9 +17,8 @@ public class RequestMapping {
 
     public void initMapping() {
     	//나희
-    	mappings.put("/detail", new ForwardController("/item/detail.jsp")); // 상세 페이지
+    	mappings.put("/detail", new DetailController()); //12/18여기 수정
         mappings.put("/edit", new ForwardController("/item/edit.jsp")); // 수정 페이지
-        //mappings.put("/new_item", new ForwardController("/item/new_item.jsp")); // 수정 페이지
         mappings.put("/new_item", new ItemController());
         mappings.forEach((key, value) -> System.out.println("경로: " + key + ", Controller: " + value));
         
@@ -29,30 +28,6 @@ public class RequestMapping {
         // UserController 매핑
         mappings.put("/user", new UserController());
 
-//        mappings.put("/user/login", new UserController("/user/login.jsp"));
-//        mappings.put("/user/login", new UserController());
-//        mappings.put("/user/logout", new LogoutController());
-//        mappings.put("/user/list", new ListUserController());
-//        mappings.put("/user/view", new ViewUserController());
-        
-        // 회원 가입 폼 요청과 가입 요청 처리 병합 (폼에 커뮤니티 선택 메뉴 추가를 위함)
-//      mappings.put("/user/login", new ForwardController("/user/login.jsp"));
-//      mappings.put("/user/register", new RegisterUserController());
-//        mappings.put("/user/register", new RegisterUserController());
-
-        // 사용자 정보 수정 폼 요청과 수정 요청 처리 병합
-//      mappings.put("/user/update/form", new UpdateUserFormController());
-//      mappings.put("/user/update", new UpdateUserController());        
-//        mappings.put("/user/update", new UpdateUserController());
-        
-//        mappings.put("/user/delete", new DeleteUserController());
-        
-        // 커뮤니티 관련 request URI 추가
-//        mappings.put("/community/list", new ListCommunityController());
-//        mappings.put("/community/view", new ViewCommunityController());
-//        mappings.put("/community/create/form", new ForwardController("/community/creationForm.jsp"));
-//        mappings.put("/community/create", new CreateCommunityController());
-//        mappings.put("/community/update", new UpdateCommunityController());
         
         logger.info("Initialized Request Mapping!");
     }

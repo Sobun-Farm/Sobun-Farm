@@ -25,42 +25,48 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) 
-    	throws ServletException, IOException {
-    	logger.debug("Method : {}, Request URI : {}, ServletPath : {}", 
-    			request.getMethod(), request.getRequestURI(), request.getServletPath());
-    	String contextPath = request.getContextPath();
-    	String servletPath = request.getServletPath();
-    	//나희 추가 확인용
-    	System.out.println("요청 경로: " + servletPath);
-    	
-    	// URL 중 servletPath에 대응되는 controller를 구함
+       throws ServletException, IOException {
+       logger.debug("Method : {}, Request URI : {}, ServletPath : {}", 
+             request.getMethod(), request.getRequestURI(), request.getServletPath());
+       
+       String contextPath = request.getContextPath();
+       String servletPath = request.getServletPath();
+       
+       logger.debug("Context Path: {}", contextPath);  // 컨텍스트 경로 로그
+        logger.debug("Servlet Path: {}", servletPath);  // 서블릿 경로 로그
+       
+       // URL 중 servletPath에 대응되는 controller를 구함
         Controller controller = rm.findController(servletPath);
+        
+        if (controller == null) {
+            logger.error("Controller not found for path: {}", servletPath);
+        } else {
+            logger.debug("Controller found for path: {}", servletPath);
+        }
+        
         try {
-        	//나희 추가 확인용
-        	if (controller == null) {
-        	    System.out.println("Controller가 null입니다. 요청 경로: " + servletPath);
-        	    throw new ServletException("요청 경로에 해당하는 Controller를 찾을 수 없습니다: "
-        	    + servletPath);
-        	    
-        	}
-        	
-        	// controller를 통해 request 처리 후, 이동할 uri를 반환 받음
+           // controller를 통해 request 처리 후, 이동할 uri를 반환 받음
             String uri = controller.execute(request, response);
             
-            if (uri == null) return;	// Ajax request 처리 완료
+            if (uri == null) return;   // Ajax request 처리 완료
             
- 			// 반환된 uri에 따라 forwarding 또는 redirection 여부를 결정하고 이동 
-            if (uri.startsWith("redirect:")) {	
-            	// redirection 지시
-            	String targetUri = contextPath + uri.substring("redirect:".length());
-            	response.sendRedirect(targetUri);	// redirect to url            
-            }
-            else {
-            	// forwarding 수행
-            	String targetUri = "/WEB-INF" + uri;
-            	RequestDispatcher rd = request.getRequestDispatcher(targetUri);
-                rd.forward(request, response);		// forward to the view page
-            }                   
+          // 반환된 uri에 따라 forwarding 또는 redirection 여부를 결정하고 이동 
+            if (uri.startsWith("redirect:")) {  
+               
+                String targetUri = contextPath + uri.substring("redirect:".length());
+                
+                response.sendRedirect(targetUri); // redirect to URL
+                
+            } else {
+               
+               String targetUri = uri.startsWith("/") ? "/WEB-INF" + uri : "/WEB-INF/" + uri;
+               logger.debug("Forwarding to: {}", targetUri); // 경로 확인 로그 추가
+               
+                RequestDispatcher rd = request.getRequestDispatcher(targetUri);
+                
+                rd.forward(request, response); // forward to the view page
+                
+            }                 
         } catch (Exception e) {
             logger.error("Exception : {}", e);
             throw new ServletException(e.getMessage());

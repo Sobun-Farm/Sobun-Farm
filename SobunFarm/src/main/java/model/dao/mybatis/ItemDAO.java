@@ -43,6 +43,7 @@ public class ItemDAO {
        }
    }
 
+   //아이템 insert
    public Long insertItem(Item item) {
 	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
 	        ItemMapper mapper = session.getMapper(ItemMapper.class);
@@ -55,7 +56,7 @@ public class ItemDAO {
 	        throw new RuntimeException("Item 삽입 중 오류 발생", e);
 	    }
 	}
-   
+   //방금 insert한 itemId 가져오기
    public Long getItemId() {
 	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
 	        return session.selectOne("model.dao.mybatis.mapper.ItemMapper.getItemId");
@@ -63,4 +64,13 @@ public class ItemDAO {
 	        throw new RuntimeException("Item ID 조회 중 오류 발생", e);
 	    }
 	}
+   //itemId로 물품 정보들 가져오기 
+   public Item getItemById(long itemId) {
+       SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession();
+       try {
+           return session.selectOne("model.dao.mybatis.mapper.ItemMapper.getItemById", itemId);
+       } finally {
+           session.close();
+       }
+   }
 }

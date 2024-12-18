@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import model.utils.MyBatisUtils;
+
 public class UserDAO {
 
     private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb"; // Oracle DB URL
@@ -206,6 +209,16 @@ public class UserDAO {
 
        return null;
    }
+   
+   // userId로 사용자 정보 가져오기. 이건 매퍼사용! 꼬일까봐 하나 더 추가함
+   public User getUserById(long userId) {
+    SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession();
+    try {
+        return session.selectOne("model.dao.mybatis.mapper.UserMapper.getUserById", userId);
+    } finally {
+        session.close();
+    }
+}
    
   
 }
