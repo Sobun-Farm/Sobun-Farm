@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.ParticipationMapper">
+    <!-- 참여 정보 삽입 -->
+    <insert id="insertParticipation" parameterType="long">
+        INSERT INTO PARTICIPATION (ITEMID, USERID)
+        VALUES (#{itemId}, #{userId})
+    </insert>
+    
+	<select id="isUserParticipated" resultType="boolean" parameterType="long">
+    	SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+   		FROM PARTICIPATION
+    	WHERE ITEMID = #{itemId} AND USERID = #{userId}
+	</select>
+
+
+</mapper>

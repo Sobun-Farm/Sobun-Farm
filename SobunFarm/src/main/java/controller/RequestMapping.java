@@ -18,7 +18,6 @@ public class RequestMapping {
     public void initMapping() {
     	//나희
     	mappings.put("/detail", new DetailController()); //12/18여기 수정
-        mappings.put("/edit", new ForwardController("/item/edit.jsp")); // 수정 페이지
         mappings.put("/new_item", new ItemController());
         mappings.forEach((key, value) -> System.out.println("경로: " + key + ", Controller: " + value));
         

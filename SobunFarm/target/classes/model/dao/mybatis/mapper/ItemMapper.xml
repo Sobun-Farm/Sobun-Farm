@@ -32,11 +32,11 @@
     </selectKey>
 
     INSERT INTO ITEM (
-        TITLE, ITEMNAME, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, 
+        TITLE, ITEMNAME, PRICE, MAXPARTICIPANT, 
         ISJOINABLE, REGION, CATEGORY, DESCRIPTION, DEADLINE, ITEMSTATUS, USERID, PURCHASELOCATION, FILENAME, FILEREALNAME,
         TRANSACTIONLOCATION, TRANSACTIONTIME
     ) VALUES (
-        #{title}, #{itemName}, #{price}, #{participantsCount}, #{maxParticipant}, 
+        #{title}, #{itemName}, #{price}, #{maxParticipant}, 
         #{isJoinable}, #{region}, #{category}, #{description}, #{deadline}, #{itemStatus}, #{userId}, #{purchaseLocation},
         #{fileName}, #{fileRealName}, #{transactionLocation}, #{transactionTime}
     )
@@ -51,4 +51,16 @@
    <select id="getItemById" resultType="model.domain.Item">
         SELECT * FROM ITEM WHERE itemId = #{itemId}
     </select>
+	
+	<!-- item지우기. 종속 설정해놔서 다른 것도 지워짐 -->
+	<delete id="deleteItem" parameterType="long">
+    DELETE FROM ITEM WHERE ITEMID = #{itemId}
+	</delete>
+	
+	<update id="incrementParticipantsCount" parameterType="long">
+    UPDATE ITEM
+    SET PARTICIPANTSCOUNT = PARTICIPANTSCOUNT + 1
+    WHERE ITEMID = #{itemId}
+	</update>
+	
 </mapper>

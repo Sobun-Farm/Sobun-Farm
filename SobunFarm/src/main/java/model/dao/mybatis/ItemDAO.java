@@ -1,6 +1,7 @@
 package model.dao.mybatis;
 
 import model.domain.Item;
+import model.domain.Transaction;
 
 import model.dao.mybatis.mapper.ItemMapper;
 import org.apache.ibatis.session.SqlSession;
@@ -73,4 +74,18 @@ public class ItemDAO {
            session.close();
        }
    }
+
+   public void deleteItem(long itemId) {
+	    try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
+	        session.delete("model.dao.mybatis.mapper.ItemMapper.deleteItem", itemId);
+	        session.commit();
+	    }
+	}
+  
+   public void incrementParticipantsCount(long itemId) {
+	    try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
+	        session.update("model.dao.mybatis.mapper.ItemMapper.incrementParticipantsCount", itemId);
+	        session.commit();
+	    }
+	}
 }

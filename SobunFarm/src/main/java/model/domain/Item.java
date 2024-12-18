@@ -23,7 +23,7 @@ public class Item {
     private String transactionTime;     // 거래 시간 추가
 
     // 생성자
-    public Item(String title, String itemName, double price, int participantsCount,
+    public Item(String title, String itemName, double price,
                 int maxParticipant, boolean isJoinable, String region, String category,
                 String description, Date deadline, String itemStatus, long userId,
                 String purchaseLocation, String fileName, String fileRealName, String transactionLocation, String transactionTime) {
@@ -31,7 +31,6 @@ public class Item {
         this.title = title;
         this.itemName = itemName;
         this.price = price;
-        this.participantsCount = participantsCount;
         this.maxParticipant = maxParticipant;
         this.isJoinable = isJoinable;
         this.region = region;

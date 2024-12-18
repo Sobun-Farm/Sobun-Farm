@@ -21,6 +21,11 @@
 			<%
     		Item item = (Item) request.getAttribute("item");
 			User user = (User) request.getAttribute("user");
+			
+			boolean isOwner = (boolean) request.getAttribute("isOwner");
+			boolean isTransactionFull = (boolean) request.getAttribute("isTransactionFull");
+			boolean isParticipated = (boolean) request.getAttribute("isParticipated");
+			
 			int perPersonPrice = (int) (item.getPrice() / item.getMaxParticipant());
 			int price = (int) (item.getPrice());
 			%>
@@ -68,11 +73,31 @@
     	</div>
     	
     	<div class="button-container">
-    	
-    	<button class="button2">거래 시작</button>
+    <% if (isOwner) { %>
+        <form method="post" action="<%= request.getContextPath() %>/detail">
+            <input type="hidden" name="action" value="complete">
+            <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
+            <button type="submit" class="button2">거래 완료</button>
+        </form>
+    <% } else { %>
+        <% if (isParticipated) { %>
+            <!-- 참여 중 버튼 -->
+			<button class="button2 disabled" disabled style="background-color: gray; color: white; cursor: default;">참여 중</button>
+        <% } else if (isTransactionFull) { %>
+            <!-- 인원 초과 버튼 -->
+            <button class="button2 disabled" disabled style="background-color: gray; color: white; cursor: default;">인원 마감</button>
+        <% } else { %>
+            <!-- 참여 가능 버튼 -->
+            <form method="post" action="<%= request.getContextPath() %>/detail">
+                <input type="hidden" name="action" value="participate">
+                <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
+                <button type="submit" class="button2">거래 참여</button>
+            </form>
+        <% } %>
+    <% } %>
+</div>
     	</div>
     	
-		</div>
 	</div>
 	
 	<div class="detail-form">
