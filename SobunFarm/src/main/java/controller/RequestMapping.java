@@ -6,7 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.user.*;
+import controller.chat.ChatController;
+import controller.chat.MessageController;
 import controller.item.*;
+import controller.mypage.MyPageController;
 //import controller.comm.*;
 
 public class RequestMapping {
@@ -16,11 +19,28 @@ public class RequestMapping {
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
+    	//나희
+    	mappings.put("/detail", new ForwardController("/item/detail.jsp")); // 상세 페이지
+        mappings.put("/edit", new ForwardController("/item/edit.jsp")); // 수정 페이지
+        //mappings.put("/new_item", new ForwardController("/item/new_item.jsp")); // 수정 페이지
+        mappings.put("/new_item", new ItemController());
+        mappings.forEach((key, value) -> System.out.println("경로: " + key + ", Controller: " + value));
+        
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/home", new HomeController());
         // UserController 매핑
         mappings.put("/user", new UserController());
+        
+        mappings.put("/MainPage", new MyPageController());
+        mappings.put("/updateDescription", new MyPageController());
+        mappings.put("/updateRegion", new MyPageController());
+        mappings.put("/updateProfileImage", new MyPageController());
+
+        
+        // 채팅 화면 관련 매핑 추가
+        mappings.put("/chat", new ChatController());  // 채팅 목록 화면을 처리하는 컨트롤러
+        mappings.put("/chatContent", new MessageController());  // 채팅방 내용 및 메시지 전송을 처리하는 컨트롤러	
 
 //        mappings.put("/user/login", new UserController("/user/login.jsp"));
 //        mappings.put("/user/login", new UserController());

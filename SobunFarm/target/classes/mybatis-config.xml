@@ -15,5 +15,11 @@
     <mappers>
         <mapper resource="model/dao/mybatis/mapper/UserMapper.xml" />
         <mapper resource="model/dao/mybatis/mapper/ItemMapper.xml" />
+        
+        <mapper resource="model/dao/mybatis/mapper/ItemGroupMapper.xml" />
+        <mapper resource="model/dao/mybatis/mapper/ChatMapper.xml" />
+        <mapper resource="model/dao/mybatis/mapper/TransactionMapper.xml" />
+		<mapper resource="model/dao/mybatis/mapper/ChatMapper.xml" />
+        <mapper resource="model/dao/mybatis/mapper/MessageMapper.xml" />
 	</mappers>
 </configuration>

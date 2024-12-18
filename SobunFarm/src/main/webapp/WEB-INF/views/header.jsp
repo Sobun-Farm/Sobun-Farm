@@ -8,21 +8,21 @@
         </div>
         <nav>
             <ul>
-                <li><a href="<%=request.getContextPath()%>/user?action=homePage">
+                <li><a href="<%=request.getContextPath()%>/user?action=homePage"> 
                     <img src="${pageContext.request.contextPath}/images/home.png" alt="Home">
                 </a></li>
-                <li><a href="#"><img src="${pageContext.request.contextPath}/images/chat.png" alt="Chat"></a></li>
+                <li><a href="<%=request.getContextPath()%>/chat"><img src="${pageContext.request.contextPath}/images/chat.png" alt="Chat" class="restricted"></a></li>
                 <li><a href="<%=request.getContextPath()%>/new_item">
-            <img src="${pageContext.request.contextPath}/images/upload.png" alt="Upload">
+            <img src="${pageContext.request.contextPath}/images/upload.png" alt="Upload" class="restricted">
         </a></li>
             </ul>
         </nav>
-         <div class="search-login" style="opacity: 0; pointer-events: none;">
-		    <input type="text" class="search-input" placeholder="검색어를 입력하세요.">
-		    <button><img src="${pageContext.request.contextPath}/images/search.png" alt="Search"></button>
-		</div>
+        <div class="search-login">
+            <input type="text" class="search-input" placeholder="검색어를 입력하세요.">
+            <button><img src="${pageContext.request.contextPath}/images/search.png" alt="Search"></button>
+        </div>
         <div class="user">
-            <span><a href="#"><img src="${pageContext.request.contextPath}/images/user.png" alt="User"></a></span>
+            <span><a href="<%=request.getContextPath()%>/user?action=mainPage"><img src="${pageContext.request.contextPath}/images/user.png" alt="User" class="restricted"></a></span>
         </div>
         <div class="login">
             <% 

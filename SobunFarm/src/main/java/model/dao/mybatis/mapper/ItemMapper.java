@@ -10,4 +10,7 @@ public interface ItemMapper {
 
     // 페이지별 물품 데이터 조회
     List<Item> getItemsByPage(Map<String, Object> params);
+    
+    //db에 물품 추가
+    void insertItem(Item item);
 }

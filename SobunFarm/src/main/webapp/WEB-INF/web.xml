@@ -31,14 +31,34 @@
 		<servlet-name>DispatcherServlet</servlet-name>
 		<servlet-class>controller.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+        	<max-file-size>5242880</max-file-size> <!-- 5MB -->
+        	<max-request-size>20971520</max-request-size> <!-- 20MB -->
+        	<file-size-threshold>10240</file-size-threshold>
+    	</multipart-config>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<!-- 나희 추가 -->
+	<session-config>
+    	<session-timeout>120</session-timeout> <!-- 30분 -->
+	</session-config>
+	
+	<!-- 하연 추가 -->
+	<servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>/uploaded/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
 </web-app>

@@ -10,14 +10,41 @@
           AND CATEGORY LIKE #{category}
     </select>
 
+	<!-- 하연수정 -->
     <!-- 페이지별 물품 데이터 조회 -->
     <select id="getItemsByPage" parameterType="map" resultType="model.domain.Item">
-        SELECT ITEMID, TITLE, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, REGION, CATEGORY
-        FROM ITEM
-        WHERE REGION = #{region}
-          AND CATEGORY LIKE #{category}
-        ORDER BY ITEMID
-        OFFSET #{offset} ROWS
-        FETCH NEXT #{itemsPerPage} ROWS ONLY
-    </select>
+	    SELECT ITEMID, TITLE, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, REGION, CATEGORY, FILEREALNAME
+	    FROM ITEM
+	    WHERE REGION = #{region}
+	      AND CATEGORY LIKE #{category}
+	    ORDER BY ITEMID
+	    OFFSET #{offset} ROWS
+	    FETCH NEXT #{itemsPerPage} ROWS ONLY
+	</select>
+
+    
+    
+    <!-- 새 물품 등록(하는 중) -->
+    <insert id="insertItem" parameterType="model.domain.Item">
+    
+    <!-- 시퀀스를 먼저 가져와 itemId에 할당 -->
+    <selectKey keyProperty="itemId" resultType="long" order="BEFORE">
+        SELECT item_seq.nextval FROM dual
+    </selectKey>
+
+    INSERT INTO ITEM (
+        TITLE, ITEMNAME, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, 
+        ISJOINABLE, REGION, CATEGORY, DESCRIPTION, DEADLINE, ITEMSTATUS, USERID, PURCHASELOCATION, FILENAME, FILEREALNAME,
+        TRANSACTIONLOCATION, TRANSACTIONTIME
+    ) VALUES (
+        #{title}, #{itemName}, #{price}, #{participantsCount}, #{maxParticipant}, 
+        #{isJoinable}, #{region}, #{category}, #{description}, #{deadline}, #{itemStatus}, #{userId}, #{purchaseLocation},
+        #{fileName}, #{fileRealName}, #{transactionLocation}, #{transactionTime}
+    )
+	</insert>
+	
+	<select id="getItemId" resultType="long">
+    SELECT item_seq.currval FROM dual
+	</select>
+	
 </mapper>

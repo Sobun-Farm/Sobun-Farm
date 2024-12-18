@@ -1,4 +1,5 @@
 package model.domain;
+
 import java.util.Date;
 
 public class Item {
@@ -16,14 +17,18 @@ public class Item {
     private String itemStatus;
     private long userId;
     private String purchaseLocation;
+    private String fileName;         // 추가된 파일명
+    private String fileRealName;     // 추가된 실제 파일명
+    private String transactionLocation; // 거래 장소 추가
+    private String transactionTime;     // 거래 시간 추가
     private byte[] photo;
 
     // 생성자
-    public Item(long itemId, String title, String itemName, double price, int participantsCount,
+    public Item(String title, String itemName, double price, int participantsCount,
                 int maxParticipant, boolean isJoinable, String region, String category,
                 String description, Date deadline, String itemStatus, long userId,
-                String purchaseLocation, byte[] photo) {
-        this.itemId = itemId;
+                String purchaseLocation, String fileName, String fileRealName, String transactionLocation, String transactionTime, byte[] photo) {
+        //this.itemId = itemId;
         this.title = title;
         this.itemName = itemName;
         this.price = price;
@@ -37,12 +42,41 @@ public class Item {
         this.itemStatus = itemStatus;
         this.userId = userId;
         this.purchaseLocation = purchaseLocation;
+        this.fileName = fileName;
+        this.fileRealName = fileRealName;
+        this.transactionLocation = transactionLocation;
+        this.transactionTime = transactionTime;
         this.photo = photo;
     }
+    
+    public Item(long itemId, String title, String itemName, double price, int participantsCount,
+            int maxParticipant, boolean isJoinable, String region, String category,
+            String description, Date deadline, String itemStatus, long userId,
+            String purchaseLocation, String fileName) {
+    this.itemId = itemId;
+    this.title = title;
+    this.itemName = itemName;
+    this.price = price;
+    this.participantsCount = participantsCount;
+    this.maxParticipant = maxParticipant;
+    this.isJoinable = isJoinable;
+    this.region = region;
+    this.category = category;
+    this.description = description;
+    this.deadline = deadline;
+    this.itemStatus = itemStatus;
+    this.userId = userId;
+    this.purchaseLocation = purchaseLocation;
+    this.fileName = fileName;
+    this.fileRealName = null; // 기본값 설정
+    this.transactionLocation = null;
+    this.transactionTime = null;
+    this.photo = null;
+}
+
 
     // 기본 생성자
-    public Item() {
-    }
+    public Item() {}
 
     // Getter 및 Setter
     public long getItemId() {
@@ -155,6 +189,38 @@ public class Item {
 
     public void setPurchaseLocation(String purchaseLocation) {
         this.purchaseLocation = purchaseLocation;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileRealName() {
+        return fileRealName;
+    }
+
+    public void setFileRealName(String fileRealName) {
+        this.fileRealName = fileRealName;
+    }
+
+    public String getTransactionLocation() {
+        return transactionLocation;
+    }
+
+    public void setTransactionLocation(String transactionLocation) {
+        this.transactionLocation = transactionLocation;
+    }
+
+    public String getTransactionTime() {
+        return transactionTime;
+    }
+
+    public void setTransactionTime(String transactionTime) {
+        this.transactionTime = transactionTime;
     }
     
     public byte[] getPhoto() {

@@ -98,14 +98,9 @@ nav ul li a img {
   border: 2px solid #e3577a;
   border-radius: 5px;
   font-size: 18px;
+  opacity: 0; /* 투명도 설정 */
 }
 
-
-
-.search-login input:focus {
-  outline: none;
-  border: 2px solid #e3577a;
-}
 
 
 .search-login button {
@@ -114,12 +109,14 @@ nav ul li a img {
   padding: 5px 10px;
   background: none;
   border: none;
+   opacity: 0; /* 투명도 설정 */
 }
 
 
 .search-login button a img {
   width: 20px;
   height: auto;
+   opacity: 0; /* 투명도 설정 */
 }
 
 
@@ -128,7 +125,6 @@ nav ul li a img {
   margin-left: 45px;
   margin-right: 10px;
 }
-
 
 /* home 스타일 */
 main {

@@ -4,6 +4,10 @@ import model.domain.User;
 import model.dao.mybatis.mapper.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import model.utils.MyBatisUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 import model.exception.UserNotFoundException;
 import model.exception.PasswordMismatchException;
@@ -11,22 +15,77 @@ import model.dao.mybatis.UserDAO;
 import model.utils.PasswordUtils;
 
 public class UserManager {
-    private static UserManager instance;
-       private UserDAO userDao;
+	 private static UserManager instance;
+	    private UserDAO userDao;
 
-       private UserManager() {
-           userDao = new UserDAO();
-       }
+	    private UserManager() {
+	        userDao = new UserDAO();
+	    }
 
-       public static UserManager getInstance() {
-           if (instance == null) {
-               instance = new UserManager();
-           }
-           return instance;
-       }
+	    public static UserManager getInstance() {
+	        if (instance == null) {
+	            instance = new UserManager();
+	        }
+	        return instance;
+	    }
+	    public byte[] getProfileImageAsBytes(Long userId) throws SQLException {
+	        return userDao.getProfileImageAsBytes(userId);
+	    }
+	    
+	    //이미지
+	    public InputStream getProfileImage(Long userId) throws SQLException {
+	        return userDao.getProfileImage(userId);
+	    }
 
+	    
+	    public void updateProfileImage(Long userId, InputStream imageStream) {
+	        userDao.updateProfileImage(userId, imageStream);
+	    }
 
-   // 회원가입
+	    
+	    //유저 이름
+	    public String getNicknameByUserId(Long userId) {
+	        return userDao.findNicknameByUserId(userId);
+	    }
+	    
+	    //성공 소분수 
+	    public int getSuccessfulTransaction(String email) throws Exception {
+	        return userDao.getSuccessfulTransaction(email); // DAO 호출
+	    }
+	    
+	    //지역 수정
+	    public String getRegion(String email) throws Exception {
+	        return userDao.getRegionByEmail(email); // DAO 호출
+	    }
+	    public void updateRegion(String email, String region) throws Exception {
+	        userDao.updateRegion(email, region);
+	    }
+	    
+	    
+	    //소개글 수정
+	    public void updateTextBox(String email, String newText) {
+	        try {
+	            // UserDAO를 사용하여 업데이트
+	            userDao.updateTextBox(email, newText);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            throw new RuntimeException("소개 수정 중 오류 발생: " + e.getMessage(), e);
+	        }
+	    }
+	    
+	    public String getTextBox(String email) {
+	    	try {
+	            // SQL 쿼리를 통해 TEXT 값 가져오기
+	            return userDao.getTextBox(email);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            throw new RuntimeException("TEXT 값 검색 중 오류 발생: " + e.getMessage(), e);
+	        }
+	    }   
+
+	   
+
+	// 회원가입
     public boolean register(User user) {
         try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
