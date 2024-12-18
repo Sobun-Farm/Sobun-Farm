@@ -1,0 +1,264 @@
+@charset "UTF-8";
+
+/* 스크롤바 비활성화 */
+body, html {
+  overflow: hidden;
+}
+
+/* 공통 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #fff8f1;
+}
+
+
+/* 헤더 스타일 */
+header {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3e898;
+  height: 100px;
+  padding: 10px 100px;
+  position: fixed;
+  width: 100%;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+header .logo span {
+  color: #0fa958;
+  font-size: 33px;
+  font-weight: bolder;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+
+header .login {
+  color: #0fa958;
+  font-size: 24px;
+  font-weight: bolder;
+  white-space: nowrap;
+}
+
+
+header .login span a {
+  text-decoration: none;
+  color: #0fa958;
+}
+
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+
+nav ul li {
+  margin: 0 10px;
+}
+
+
+nav ul li a img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+
+.search-login {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+}
+
+
+.search-login input {
+  padding: 5px;
+  width: 450px;
+  height: 50px;
+  border: 2px solid #e3577a;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+
+.search-login input:focus {
+  outline: none;
+  border: 2px solid #e3577a;
+}
+
+
+.search-login button {
+  position: absolute;
+  margin-left: 385px;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+}
+
+
+.search-login button a img {
+  width: 35px;
+  height: auto;
+}
+
+
+.user img {
+  width: 40px;
+  margin-left: 45px;
+  margin-right: 10px;
+}
+
+
+/* 메인 페이지 및 회원가입 폼 스타일 */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+
+.signup-form {
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+
+.signup-form h2 {
+  font-size: 38px;
+  font-weight: bold;
+  color: #4b5b12;
+  margin-bottom: 25px;
+  padding-top: 78px;
+}
+
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+  min-height: 20px;
+}
+.input-group input,
+.input-group select {
+  width: 400px;
+  padding: 15px;
+  font-size: 18px;
+  border: 3px solid #4b5b12;
+  border-radius: 15px;
+}
+
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: #e3577a;
+}
+
+
+.input-group button {
+  margin-left: 10px;
+  width: 100px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e3577a;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+#email,
+#nickname {
+  width: 390px;
+}
+
+
+#password,
+#password-confirm,
+#region {
+  width: 500px;
+}
+
+
+/* 에러 메시지와 레이아웃 고정 */
+.error-message {
+  color: red;
+  font-size: 18px;
+  min-height: 20px;
+  margin-top: 5px;
+}
+
+
+#signup-button {
+  width: 500px;
+  padding: 15px;
+  background-color: #85a26c;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+#signup-button:disabled {
+  background-color: rgba(119, 119, 119, 0.5);
+}
+
+
+.error-message {
+  color: red;
+  font-size: 18px;
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+
+select {
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid #4b5b12;
+  width: 100%;
+}
+
+
+select option {
+  padding: 10px;
+  font-size: 18px;
+}

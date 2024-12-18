@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.ItemGroupMapper">
+
+    <!-- ItemGroup을 DB에 삽입하는 SQL -->
+    <insert id="insertItemGroup" parameterType="model.domain.ItemGroup">
+        INSERT INTO ItemGroup (itemId) VALUES (#{itemId})
+    </insert>
+    
+</mapper>

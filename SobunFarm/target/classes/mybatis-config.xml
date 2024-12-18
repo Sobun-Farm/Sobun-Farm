@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+                <property name="url" value="jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb" />
+                <property name="username" value="dbp240201" />
+                <property name="password" value="111135" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="model/dao/mybatis/mapper/UserMapper.xml" />
+        <mapper resource="model/dao/mybatis/mapper/ItemMapper.xml" />
+        
+        <mapper resource="model/dao/mybatis/mapper/ItemGroupMapper.xml" />
+        <mapper resource="model/dao/mybatis/mapper/ChatMapper.xml" />
+        <mapper resource="model/dao/mybatis/mapper/TransactionMapper.xml" />
+	</mappers>
+</configuration>
