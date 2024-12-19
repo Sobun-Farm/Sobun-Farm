@@ -16,10 +16,11 @@
 	    FROM ITEM
 	    WHERE REGION = #{region}
 	      AND CATEGORY LIKE #{category}
-	    ORDER BY ITEMID
+	    ORDER BY ITEMID DESC
 	    OFFSET #{offset} ROWS
 	    FETCH NEXT #{itemsPerPage} ROWS ONLY
 	</select>
+
 
     <!-- 새 물품 등록-->
     <insert id="insertItem" parameterType="model.domain.Item">

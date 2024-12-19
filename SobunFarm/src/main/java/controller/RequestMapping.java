@@ -20,7 +20,7 @@ public class RequestMapping {
 
     public void initMapping() {
 
-    	mappings.put("/", new ForwardController("index.jsp"));
+       mappings.put("/", new ForwardController("index.jsp"));
 
         // 홈
         mappings.put("/home", new HomeController());
@@ -40,16 +40,14 @@ public class RequestMapping {
 
         // 물품
         mappings.put("/detail", new DetailController()); 
-        mappings.put("/new_item", new ItemController());
         mappings.forEach((key, value) -> System.out.println("경로: " + key + ", Controller: " + value));
-    	mappings.put("/detail", new ForwardController("/item/detail.jsp")); // 상세 페이지
-        mappings.put("/edit", new ForwardController("/item/edit.jsp")); // 수정 페이지
+        mappings.put("/new_item", new ItemController());
 
         logger.info("Initialized Request Mapping!");
     }
 
-    public Controller findController(String uri) {	
-    	// 주어진 uri에 대응되는 controller 객체를 찾아 반환
+    public Controller findController(String uri) {   
+       // 주어진 uri에 대응되는 controller 객체를 찾아 반환
         return mappings.get(uri);
     }
 }

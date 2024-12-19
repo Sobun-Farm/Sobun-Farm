@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    List<Item> itemList = (List<Item>)request.getAttribute("itemList");
-   List<Item> paticipationItemList = (List<Item>)request.getAttribute("paticipationItemList");
+   List<Item> participationItemList = (List<Item>)request.getAttribute("participationItemList");
 %>
 <% 
     String base64Image = (String) session.getAttribute("base64Image");
@@ -52,7 +52,7 @@
         <!-- 프로필 섹션 -->
         <div class="profile-section">
             <div class="profile-image">
-            <%
+               <%
                 // base64Image가 null이거나 비어있을 경우 기본 이미지 경로 사용
                 String imageSrc;
                 if (base64Image == null || base64Image.isEmpty()) {
@@ -62,7 +62,7 @@
                 }
             %>
             <img id="profileImage" src="<%= imageSrc %>" alt="프로필 이미지" onclick="showImageUploadPopup()">
-                <h2>${nickname}</h2>
+             <h2>${nickname}</h2>
                 <!-- <button class="btn btn-edit-name">이름 수정</button> -->
             </div>
             <div class="profile-info">
@@ -129,16 +129,30 @@
           <div id="myItems" class="groups"">
               <c:forEach var="item" items="${ItemList}">
                   <div class="group-card">
-                      <img src="<%=request.getContextPath()%>/images/oc.jpg" alt="소분 이미지">
-                      <p>${item.title}</p>
+                        <a href="${pageContext.request.contextPath}/detail?itemId=${item.itemId }">
+                  <c:if test="${item.fileName != null}">
+                        <img src="<%= request.getContextPath() %>/uploaded/${item.fileName}" alt="소분 이미지">
+                    </c:if>
+                    <c:if test="${item.fileName == null}">
+                        <img src="<%= request.getContextPath() %>/uploaded/default_item.png" alt="소분 이미지">
+                    </c:if>           
+                    </a>          
+               <p>${item.title}</p>
                   </div>
               </c:forEach>
           </div>
       
           <div id="participatedItems" class="groups" style="display: none;">
-              <c:forEach var="item" items="${paticipationItemList}">
+              <c:forEach var="item" items="${participationItemList}">
                   <div class="group-card">
-                      <img src="<%=request.getContextPath()%>/images/oc.jpg" alt="소분 이미지">
+                        <a href="${pageContext.request.contextPath}/detail?itemId=${item.itemId }">
+                         <c:if test="${item.fileName != null}">
+                        <img src="<%= request.getContextPath() %>/uploaded/${item.fileName}" alt="소분 이미지">
+                    </c:if>
+                    <c:if test="${item.fileName == null}">
+                        <img src="<%= request.getContextPath() %>/uploaded/default_item.png" alt="소분 이미지">
+                    </c:if> 
+                    </a>
                       <p>${item.title}</p>
                   </div>
               </c:forEach>

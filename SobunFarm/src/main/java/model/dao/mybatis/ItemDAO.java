@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ItemDAO {
-	//지우 추가
-	private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb";
+   //지우 추가
+   private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb";
     private final String DB_USER = "dbp240201";
     private final String DB_PASSWORD = "111135";
 
@@ -62,7 +62,7 @@ public class ItemDAO {
                     rs.getString("ITEMSTATUS"),
                     rs.getLong("USERID"),
                     rs.getString("PURCHASELOCATION"),
-                    null
+                    rs.getString("FILEREALNAME")
                 );
                 items.add(item); // 리스트에 아이템 추가
             }
@@ -98,7 +98,7 @@ public class ItemDAO {
                     rs.getString("ITEMSTATUS"),
                     rs.getLong("USERID"),
                     rs.getString("PURCHASELOCATION"),
-                    null
+                    rs.getString("FILEREALNAME")
                 );
                 items.add(item);
             }
@@ -115,10 +115,10 @@ public class ItemDAO {
         List<Item> items = new ArrayList<>();
 
         try (
-        	Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+           Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
-        	
-        	stmt.setLong(1, userId);
+           
+           stmt.setLong(1, userId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -136,7 +136,7 @@ public class ItemDAO {
                     rs.getString("ITEMSTATUS"),
                     rs.getLong("USERID"),
                     rs.getString("PURCHASELOCATION"),
-                    null
+                    rs.getString("FILEREALNAME")
                 );
                 items.add(item);
             }
@@ -179,26 +179,26 @@ public class ItemDAO {
 
    // 아이템 insert
    public Long insertItem(Item item) {
-	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
-	        ItemMapper mapper = session.getMapper(ItemMapper.class);
-	        mapper.insertItem(item);
-	        session.commit();
-	        
-	        return item.getItemId(); 
-	        
-	    } catch (Exception e) {
-	        throw new RuntimeException("Item 삽입 중 오류 발생", e);
-	    }
-	}
+       try (SqlSession session = MyBatisUtils.getSqlSession()) {
+           ItemMapper mapper = session.getMapper(ItemMapper.class);
+           mapper.insertItem(item);
+           session.commit();
+           
+           return item.getItemId(); 
+           
+       } catch (Exception e) {
+           throw new RuntimeException("Item 삽입 중 오류 발생", e);
+       }
+   }
    
    // 방금 insert한 itemId 가져오기
    public Long getItemId() {
-	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
-	        return session.selectOne("model.dao.mybatis.mapper.ItemMapper.getItemId");
-	    } catch (Exception e) {
-	        throw new RuntimeException("Item ID 조회 중 오류 발생", e);
-	    }
-	}
+       try (SqlSession session = MyBatisUtils.getSqlSession()) {
+           return session.selectOne("model.dao.mybatis.mapper.ItemMapper.getItemId");
+       } catch (Exception e) {
+           throw new RuntimeException("Item ID 조회 중 오류 발생", e);
+       }
+   }
    
    // itemId로 물품 정보들 가져오기 
    public Item getItemById(long itemId) {
@@ -211,18 +211,18 @@ public class ItemDAO {
    }
 
    public void deleteItem(long itemId) {
-	    try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
-	        session.delete("model.dao.mybatis.mapper.ItemMapper.deleteItem", itemId);
-	        session.commit();
-	    }
-	}
+       try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
+           session.delete("model.dao.mybatis.mapper.ItemMapper.deleteItem", itemId);
+           session.commit();
+       }
+   }
   
    public void incrementParticipantsCount(long itemId) {
-	    try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
-	        session.update("model.dao.mybatis.mapper.ItemMapper.incrementParticipantsCount", itemId);
-	        session.commit();
-	    }
-	}
+       try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
+           session.update("model.dao.mybatis.mapper.ItemMapper.incrementParticipantsCount", itemId);
+           session.commit();
+       }
+   }
    
    // 진행소분수
    public int countMyItem(Long userId) {
