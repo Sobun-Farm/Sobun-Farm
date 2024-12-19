@@ -37,8 +37,8 @@
         TRANSACTIONLOCATION, TRANSACTIONTIME
     ) VALUES (
         #{title}, #{itemName}, #{price}, #{maxParticipant}, 
-        #{isJoinable}, #{region}, #{category}, #{description}, #{deadline}, #{itemStatus}, #{userId}, #{purchaseLocation},
-        #{fileName}, #{fileRealName}, #{transactionLocation}, #{transactionTime}
+        #{isJoinable}, #{region}, #{category}, #{description, jdbcType=VARCHAR}, #{deadline}, #{itemStatus}, #{userId}, #{purchaseLocation},
+        #{fileName, jdbcType=VARCHAR}, #{fileRealName, jdbcType=VARCHAR}, #{transactionLocation}, #{transactionTime}
     )
    </insert>
    

@@ -117,7 +117,7 @@ public class ItemController implements Controller {
             itemDTO.setTitle(title);
             itemDTO.setItemName(itemName);
             itemDTO.setPrice(price);
-            itemDTO.setParticipantsCount(0);
+            //itemDTO.setParticipantsCount(0); 없앰. db에서 default 1
             itemDTO.setMaxParticipant(maxParticipant);
             itemDTO.setJoinable(true);
             itemDTO.setRegion(region);

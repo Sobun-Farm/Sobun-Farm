@@ -20,7 +20,8 @@
         </div>
 
         <!-- 거래 등록 폼 -->
-        <form action="<%=request.getContextPath()%>/new_item" method="post" enctype="multipart/form-data" class="edit-form">
+        <form action="<%=request.getContextPath()%>/new_item" 
+        method="post" enctype="multipart/form-data" class="edit-form">
              <!-- 제목 -->
             <div class="form-group">
                 <label for="title">제목 <span class="required">*</span></label>
@@ -106,25 +107,25 @@
 
             <!-- 구매 장소 -->
             <div class="form-group">
-                <label for="purchaseLocation">구매 장소</label>
-                <input type="text" id="purchaseLocation" name="purchaseLocation" placeholder="예: 쿠팡" />
+                <label for="purchaseLocation">구매 장소 <span class="required">*</span></label>
+                <input type="text" id="purchaseLocation" name="purchaseLocation" placeholder="예: 쿠팡" required />
             </div>
             
             <!-- 거래 장소 -->
             <div class="form-group">
-                <label for="transactionLocation">거래 장소</label>
-                <input type="text" id="transactionLocation" name="transactionLocation" placeholder="동덕여대 백주년 앞" />
+                <label for="transactionLocation">거래 장소 <span class="required">*</span></label>
+                <input type="text" id="transactionLocation" name="transactionLocation" placeholder="동덕여대 백주년 앞" required />
             </div>
 
             <!-- 거래 시간 -->
             <div class="form-group">
-                <label for="transactionTime">거래 시간</label>
-                <input type="text" id="transactionTime" name="transactionTime" placeholder="오후 3시 15분" />
+                <label for="transactionTime">거래 시간 <span class="required">*</span></label>
+                <input type="text" id="transactionTime" name="transactionTime" placeholder="오후 3시 15분" required />
             </div>
 
             <!-- 상세 정보 -->
             <div class="form-group full-width">
-                <label for="description">상세 정보</label>
+                <label for="description">상세 정보 <span class="required">*</span></label>
                 <textarea id="description" name="description" placeholder="상세 정보를 입력하세요." required></textarea>
             </div>
 
@@ -135,6 +136,7 @@
         </form>
     </div>
 </body>
+
 </html>
 
 
