@@ -1,0 +1,264 @@
+/* 공통 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #fff8f1;
+}
+
+
+/* 헤더 스타일 */
+header {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3e898;
+  height: 100px;
+  padding: 10px 100px;
+  position: fixed;
+  width: 100%;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+header .logo span {
+  color: #0fa958;
+  font-size: 33px;
+  font-weight: bolder;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+
+header .login {
+  color: #0fa958;
+  font-size: 24px;
+  font-weight: bolder;
+  white-space: nowrap;
+}
+
+
+header .login span a {
+  text-decoration: none;
+  color: #0fa958;
+}
+
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+
+nav ul li {
+  margin: 0 10px;
+}
+
+
+nav ul li a img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+
+.search-login {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+}
+
+
+.search-login input {
+  padding: 5px;
+  width: 450px;
+  height: 50px;
+  border: 2px solid #e3577a;
+  border-radius: 5px;
+  font-size: 18px;
+  opacity: 0; /* 투명도 설정 */
+}
+
+
+
+.search-login button {
+  position: absolute;
+  margin-left: 385px;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+   opacity: 0; /* 투명도 설정 */
+}
+
+
+.search-login button a img {
+  width: 20px;
+  height: auto;
+   opacity: 0; /* 투명도 설정 */
+}
+
+
+.user img {
+  width: 40px;
+  margin-left: 45px;
+  margin-right: 10px;
+}
+
+/* main chat부분 */
+.container {
+  display: flex;
+  padding-top: 120px;
+}
+
+/*왼쪽 부분 */
+
+
+.chat-list {
+  width: 30%;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-right: 2px solid #e0e0e0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.chat-room {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chat-room:hover {
+  background-color: #f0f8ff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chat-room img {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+
+/* 선택된 채팅방 스타일 */
+.chat-room-selected {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #0fa958;
+  border-radius: 8px;
+  background-color: #d3e898;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.chat-room-selected img {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+
+/* 오른쪽 부분 */
+.chat-content {
+  width: 70%;
+  padding: 20px;
+  background-color: #fff;
+  height: 100vh;
+}
+
+
+.messages_input {
+  display: flex; /* 요소를 가로로 배치 */
+  gap: 10px; /* 요소 사이의 간격 */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.messages_input input[type="text"] {
+  flex: 1; /* 입력창이 남은 공간을 차지하도록 설정 */
+  height: 50px;
+  width:500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+
+.messages_input button {
+  width: 100px;
+  height: 50px;
+  background-color: #0fa958;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.messages_input button:hover {
+  background-color: #0b7f47;
+}
+
+.no-chat, .error-message {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.no-chat img {
+  width: 150px;
+}
+
+
+/* 채팅방 나가기 버튼 스타일 */
+.exit-button {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 200px;
+  height: 30px;
+  background-color: #e57373; /* 나가기 버튼 색상 */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.exit-button:hover {
+  background-color: #d32f2f;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.TransactionMapper">
+
+    <!-- Transaction 삽입 -->
+    <insert id="insertTransaction" parameterType="model.domain.Transaction">
+        INSERT INTO Transaction (transactionStatus, isConfirmed, itemId)
+        VALUES (#{transactionStatus}, #{isConfirmed}, #{itemId})
+    </insert>
+    
+    <!-- itemId로 transaction 가져오기 -->
+    <select id="getTransactionByItemId" resultType="model.domain.Transaction" parameterType="long">
+    SELECT * FROM TRANSACTION WHERE ITEMID = #{itemId}
+	</select>
+	
+	<!-- 트랜잭션 상태 업데이트 -->
+    <update id="updateTransactionStatus">
+        UPDATE TRANSACTION
+        SET transactionStatus = #{status}
+        WHERE itemId = #{itemId}
+    </update>
+	
+</mapper>

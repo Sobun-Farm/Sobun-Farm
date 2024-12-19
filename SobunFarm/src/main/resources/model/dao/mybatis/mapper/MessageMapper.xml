@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="model.dao.mybatis.mapper.MessageMapper">
+
+    <!-- 채팅방에 해당하는 메시지들을 가져오는 SQL 쿼리 -->
+	<resultMap id="MessageResultMap" type="model.domain.Message">
+	    <id property="messageId" column="messageId" />
+	    <result property="chatId" column="chatId" />
+	    <result property="userId" column="userId" />
+	    <result property="content" column="content" />
+	    <result property="timestamp" column="timestamp" />
+	    <result property="sender" column="sender" />
+	</resultMap>
+	
+	<select id="findMessagesByChatId" resultMap="MessageResultMap">
+	    SELECT 
+	        m.messageId, 
+	        m.chatId, 
+	        m.userId, 
+	        m.content, 
+	        m.timestamp, 
+	        u.nickname AS sender
+	    FROM message m
+	    JOIN appuser u ON m.userId = u.userId
+	    WHERE m.chatId = #{chatId}
+	    ORDER BY m.timestamp ASC
+	</select>
+
+    <!-- 메시지 삽입 -->
+    <insert id="insertMessage" parameterType="model.domain.Message">
+	    INSERT INTO Message (chatId, userId, content, timestamp)
+	    VALUES (#{chatId}, #{userId}, #{content}, #{timestamp})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.ItemMapper">
+
+    <!-- 전체 물품 수 조회 -->
+    <select id="getTotalItemCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) 
+        FROM ITEM 
+        WHERE REGION = #{region} 
+          AND CATEGORY LIKE #{category}
+    </select>
+
+    <!-- 페이지별 물품 데이터 조회 -->
+    <select id="getItemsByPage" parameterType="map" resultType="model.domain.Item">
+	    SELECT ITEMID, TITLE, PRICE, PARTICIPANTSCOUNT, MAXPARTICIPANT, REGION, CATEGORY, FILEREALNAME
+	    FROM ITEM
+	    WHERE REGION = #{region}
+	      AND CATEGORY LIKE #{category}
+	    ORDER BY ITEMID DESC
+	    OFFSET #{offset} ROWS
+	    FETCH NEXT #{itemsPerPage} ROWS ONLY
+	</select>
+
+    <!-- 새 물품 등록-->
+    <insert id="insertItem" parameterType="model.domain.Item">
+    
+    <selectKey keyProperty="itemId" resultType="long" order="BEFORE">
+        SELECT item_seq.nextval FROM dual
+    </selectKey>
+
+    INSERT INTO ITEM (
+        TITLE, ITEMNAME, PRICE, MAXPARTICIPANT, 
+        ISJOINABLE, REGION, CATEGORY, DESCRIPTION, DEADLINE, ITEMSTATUS, USERID, PURCHASELOCATION, FILENAME, FILEREALNAME,
+        TRANSACTIONLOCATION, TRANSACTIONTIME
+    ) VALUES (
+        #{title}, #{itemName}, #{price}, #{maxParticipant}, 
+        #{isJoinable}, #{region}, #{category}, #{description, jdbcType=VARCHAR}, #{deadline}, #{itemStatus}, #{userId}, #{purchaseLocation},
+        #{fileName, jdbcType=VARCHAR}, #{fileRealName, jdbcType=VARCHAR}, #{transactionLocation}, #{transactionTime}
+    )
+   </insert>
+   
+   <!-- 물품 등록하고 바로 itemId 가져오기 -->
+   <select id="getItemId" resultType="long">
+    SELECT item_seq.currval FROM dual
+   </select>
+   
+   <!-- itemId로 아이템 정보 전부 가져오기(물품 세부때 사용) -->
+   <select id="getItemById" resultType="model.domain.Item">
+        SELECT * FROM ITEM WHERE itemId = #{itemId}
+    </select>
+	
+	<!-- item지우기. 종속 설정해놔서 다른 것도 지워짐 -->
+	<delete id="deleteItem" parameterType="long">
+    DELETE FROM ITEM WHERE ITEMID = #{itemId}
+	</delete>
+	
+	<update id="incrementParticipantsCount" parameterType="long">
+    UPDATE ITEM
+    SET PARTICIPANTSCOUNT = PARTICIPANTSCOUNT + 1
+    WHERE ITEMID = #{itemId}
+	</update>
+	
+</mapper>
