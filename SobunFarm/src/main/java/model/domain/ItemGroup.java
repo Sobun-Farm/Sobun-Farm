@@ -3,7 +3,6 @@ package model.domain;
 public class ItemGroup {
     private long itemId;
 
-    // 기본 생성자, getter, setter
     public ItemGroup(long itemId) {
         this.itemId = itemId;
     }

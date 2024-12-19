@@ -17,12 +17,11 @@ public class ItemDTO {
     private String itemStatus;
     private long userId;
     private String purchaseLocation;
-    private String fileName;         // 추가된 파일명
-    private String fileRealName;     // 추가된 실제 파일명
-    private String transactionLocation; // 거래 장소 추가
-    private String transactionTime;     // 거래 시간 추가
+    private String fileName;
+    private String fileRealName;
+    private String transactionLocation;
+    private String transactionTime;
 
-    // 생성자
     public ItemDTO(long itemId, String title, String itemName, double price, int participantsCount,
                 int maxParticipant, boolean isJoinable, String region, String category,
                 String description, Date deadline, String itemStatus, long userId,
@@ -47,10 +46,8 @@ public class ItemDTO {
         this.transactionTime = transactionTime;
     }
 
-    // 기본 생성자
     public ItemDTO() {}
 
-    // Getter 및 Setter
     public long getItemId() {
         return itemId;
     }

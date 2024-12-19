@@ -28,7 +28,7 @@ public class MessageDAO {
         try (SqlSession session = MyBatisSessionFactory.getSqlSession()) {
             MessageMapper mapper = session.getMapper(MessageMapper.class);
             mapper.insertMessage(message);
-            session.commit();  // 커밋
+            session.commit();
         } catch (Exception e) {
             logger.error("메시지 삽입 중 오류 발생: ", e);
             throw new RuntimeException("메시지 삽입 실패", e);

@@ -13,6 +13,7 @@ import model.domain.ItemGroup;
 import model.domain.Transaction;
 import model.domain.Chat;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
@@ -22,12 +23,14 @@ import java.sql.Date;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import java.nio.file.Paths;
+
 @MultipartConfig // 파일 업로드를 처리하기 위해 추가
 public class ItemController implements Controller {
-	 private final ItemDAO itemDAO = new ItemDAO(); // DAO 인스턴스 생성
-	 private final ItemGroupDAO itemGroupDAO = new ItemGroupDAO();
-	 private final TransactionDAO transactionDAO = new TransactionDAO();
-	 private final ChatDAO chatDAO = new ChatDAO();
+    private final ItemDAO itemDAO = new ItemDAO(); // DAO 인스턴스 생성
+    private final ItemGroupDAO itemGroupDAO = new ItemGroupDAO();
+    private final TransactionDAO transactionDAO = new TransactionDAO();
+    private final ChatDAO chatDAO = new ChatDAO();
 
 
     @Override
@@ -68,10 +71,11 @@ public class ItemController implements Controller {
             if (userId == null) {
                 return "/user/login.jsp";
             }
+            
 
             // 데이터 읽기 (파일 업로드를 위해 MultipartRequest 사용)
-            String directory = "C:\\Users\\hhayo\\Desktop\\Sobun-Farm\\SobunFarm\\src\\main\\webapp\\uploaded";
-//            String directory = "C:\\Users\\kimna\\Downloads\\Sobun-Farm-hayoun\\Sobun-Farm-hayoun\\SobunFarm\\src\\main\\webapp\\uploaded"; // 업로드 디렉토리 경로
+            ServletContext context = request.getServletContext();
+            String directory = context.getRealPath("/uploaded");
             int sizeLimit = 100 * 1024 * 1024; // 100MB 제한
             
             MultipartRequest multi = new MultipartRequest(request, directory, sizeLimit, "UTF-8", new DefaultFileRenamePolicy() );
@@ -118,7 +122,7 @@ public class ItemController implements Controller {
             itemDTO.setTitle(title);
             itemDTO.setItemName(itemName);
             itemDTO.setPrice(price);
-            itemDTO.setParticipantsCount(0);
+            //itemDTO.setParticipantsCount(0); 없앰. db에서 default 
             itemDTO.setMaxParticipant(maxParticipant);
             itemDTO.setJoinable(true);
             itemDTO.setRegion(region);
@@ -174,7 +178,7 @@ public class ItemController implements Controller {
             Chat chat = new Chat(itemId);
             chatDAO.createChatRoom(chat);
             System.out.println("등록된 Chat itemId: " + chat.getItemId());
-            		
+                  
             response.sendRedirect(request.getContextPath() + "/home");
             return null;
 

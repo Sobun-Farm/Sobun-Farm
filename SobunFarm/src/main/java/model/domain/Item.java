@@ -17,10 +17,10 @@ public class Item {
     private String itemStatus;
     private long userId;
     private String purchaseLocation;
-    private String fileName;         // 추가된 파일명
-    private String fileRealName;     // 추가된 실제 파일명
-    private String transactionLocation; // 거래 장소 추가
-    private String transactionTime;     // 거래 시간 추가
+    private String fileName;
+    private String fileRealName;
+    private String transactionLocation;
+    private String transactionTime;
     private byte[] photo;
 
     // 생성자
@@ -28,7 +28,6 @@ public class Item {
                 int maxParticipant, boolean isJoinable, String region, String category,
                 String description, Date deadline, String itemStatus, long userId,
                 String purchaseLocation, String fileName, String fileRealName, String transactionLocation, String transactionTime, byte[] photo) {
-        //this.itemId = itemId;
         this.title = title;
         this.itemName = itemName;
         this.price = price;
@@ -49,7 +48,7 @@ public class Item {
         this.photo = photo;
     }
     
-    public Item(long itemId, String title, String itemName, double price, int participantsCount,
+    public Item(long itemId, String title, String itemName, double price,
             int maxParticipant, boolean isJoinable, String region, String category,
             String description, Date deadline, String itemStatus, long userId,
             String purchaseLocation, String fileName) {
@@ -57,7 +56,6 @@ public class Item {
     this.title = title;
     this.itemName = itemName;
     this.price = price;
-    this.participantsCount = participantsCount;
     this.maxParticipant = maxParticipant;
     this.isJoinable = isJoinable;
     this.region = region;
@@ -75,10 +73,8 @@ public class Item {
 }
 
 
-    // 기본 생성자
     public Item() {}
 
-    // Getter 및 Setter
     public long getItemId() {
         return itemId;
     }

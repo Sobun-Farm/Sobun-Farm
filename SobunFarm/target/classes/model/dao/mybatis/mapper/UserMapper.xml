@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="model.dao.mybatis.mapper.UserMapper">
+
     <insert id="insertUser" parameterType="model.domain.User">
-    INSERT INTO APPUSER (USERID, EMAIL, PASSWORD, NICKNAME, REGION)
-    VALUES (APPUSER_SEQ.NEXTVAL, #{email}, #{password}, #{nickname}, #{region})
-</insert>
+	    INSERT INTO APPUSER (USERID, EMAIL, PASSWORD, NICKNAME, REGION)
+	    VALUES (APPUSER_SEQ.NEXTVAL, #{email}, #{password}, #{nickname}, #{region})
+	</insert>
 
     <select id="isEmailExists" resultType="int" parameterType="string">
-    SELECT COUNT(*) 
-    FROM APPUSER
-    WHERE EMAIL = #{email}
-</select>
+	    SELECT COUNT(*) 
+	    FROM APPUSER
+	    WHERE EMAIL = #{email}
+	</select>
     <select id="isNicknameExists" parameterType="string" resultType="int">
-    SELECT COUNT(*) 
-    FROM APPUSER 
-    WHERE NICKNAME = #{nickname}
-</select>
+	    SELECT COUNT(*) 
+	    FROM APPUSER 
+	    WHERE NICKNAME = #{nickname}
+	</select>
 
-    <!-- Select query -->
     <select id="getUserByEmail" parameterType="string" resultType="model.domain.User">
-    SELECT * FROM APPUSER WHERE EMAIL = #{email}
-</select>
+	    SELECT * FROM APPUSER WHERE EMAIL = #{email}
+	</select>
 
-<select id="getAllUsers" resultType="model.domain.User">
-    SELECT * FROM APPUSER
-</select>
+	<select id="getAllUsers" resultType="model.domain.User">
+	    SELECT * FROM APPUSER
+	</select>
+
+	<select id="getUserById" resultType="model.domain.User" parameterType="long">
+	    SELECT * FROM APPUSER WHERE USERID = #{userId}
+	</select>
+	
 </mapper>

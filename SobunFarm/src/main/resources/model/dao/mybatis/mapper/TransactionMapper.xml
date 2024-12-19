@@ -8,4 +8,16 @@
         VALUES (#{transactionStatus}, #{isConfirmed}, #{itemId})
     </insert>
     
+    <!-- itemId로 transaction 가져오기 -->
+    <select id="getTransactionByItemId" resultType="model.domain.Transaction" parameterType="long">
+    SELECT * FROM TRANSACTION WHERE ITEMID = #{itemId}
+	</select>
+	
+	<!-- 트랜잭션 상태 업데이트 -->
+    <update id="updateTransactionStatus">
+        UPDATE TRANSACTION
+        SET transactionStatus = #{status}
+        WHERE itemId = #{itemId}
+    </update>
+	
 </mapper>

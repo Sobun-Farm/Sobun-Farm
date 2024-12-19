@@ -28,44 +28,40 @@ public class UserManager {
 	        }
 	        return instance;
 	    }
+	    
 	    public byte[] getProfileImageAsBytes(Long userId) throws SQLException {
 	        return userDao.getProfileImageAsBytes(userId);
 	    }
 	    
-	    //이미지
 	    public InputStream getProfileImage(Long userId) throws SQLException {
 	        return userDao.getProfileImage(userId);
 	    }
 
-	    
 	    public void updateProfileImage(Long userId, InputStream imageStream) {
 	        userDao.updateProfileImage(userId, imageStream);
 	    }
 
-	    
-	    //유저 이름
 	    public String getNicknameByUserId(Long userId) {
 	        return userDao.findNicknameByUserId(userId);
 	    }
 	    
-	    //성공 소분수 
+	    // 성공 소분수 
 	    public int getSuccessfulTransaction(String email) throws Exception {
-	        return userDao.getSuccessfulTransaction(email); // DAO 호출
+	        return userDao.getSuccessfulTransaction(email);
 	    }
 	    
-	    //지역 수정
+	    // 지역 수정
 	    public String getRegion(String email) throws Exception {
-	        return userDao.getRegionByEmail(email); // DAO 호출
+	        return userDao.getRegionByEmail(email);
 	    }
+	    
 	    public void updateRegion(String email, String region) throws Exception {
 	        userDao.updateRegion(email, region);
 	    }
 	    
-	    
-	    //소개글 수정
+	    // 소개글 수정
 	    public void updateTextBox(String email, String newText) {
 	        try {
-	            // UserDAO를 사용하여 업데이트
 	            userDao.updateTextBox(email, newText);
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -75,16 +71,13 @@ public class UserManager {
 	    
 	    public String getTextBox(String email) {
 	    	try {
-	            // SQL 쿼리를 통해 TEXT 값 가져오기
 	            return userDao.getTextBox(email);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            throw new RuntimeException("TEXT 값 검색 중 오류 발생: " + e.getMessage(), e);
 	        }
 	    }   
-
 	   
-
 	// 회원가입
     public boolean register(User user) {
         try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
@@ -133,8 +126,6 @@ public class UserManager {
         }
     }
 
-    //수정
-    
     // 로그인
     public User login(String email, String password) throws UserNotFoundException, PasswordMismatchException {
         // 이메일로 사용자 조회
@@ -150,6 +141,4 @@ public class UserManager {
         }
         return user;
     }
-
-
 }

@@ -4,16 +4,7 @@
 
 <mapper namespace="model.dao.mybatis.mapper.MessageMapper">
 
-    <!-- 특정 채팅방의 메시지 조회 
-    <select id="findMessagesByChatId" resultType="model.domain.Message">
-        SELECT messageId, chatId, userId, content, timestamp
-        FROM Message
-        WHERE chatId = #{chatId}
-        ORDER BY timestamp ASC
-    </select> -->
-    
     <!-- 채팅방에 해당하는 메시지들을 가져오는 SQL 쿼리 -->
-	
 	<resultMap id="MessageResultMap" type="model.domain.Message">
 	    <id property="messageId" column="messageId" />
 	    <result property="chatId" column="chatId" />
@@ -37,15 +28,10 @@
 	    ORDER BY m.timestamp ASC
 	</select>
 
-
-
-
     <!-- 메시지 삽입 -->
     <insert id="insertMessage" parameterType="model.domain.Message">
 	    INSERT INTO Message (chatId, userId, content, timestamp)
 	    VALUES (#{chatId}, #{userId}, #{content}, #{timestamp})
 	</insert>
-
-
-
+	
 </mapper>

@@ -6,7 +6,6 @@ public class Transaction {
     private String isConfirmed = "N"; // 확인 여부
     private long itemId;
 
-    // 기본 생성자, getter, setter
     public Transaction(long itemId) {
         this.itemId = itemId;
     }

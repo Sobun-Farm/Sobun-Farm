@@ -4,13 +4,17 @@
 
 <mapper namespace="model.dao.mybatis.mapper.ChatMapper">
 
-     <!-- 사용자 ID로 채팅방 목록 조회 -->
+    <!-- 사용자 ID로 채팅방 목록 조회 -->
     <select id="findChatRoomsByUser" resultType="model.domain.Chat">
-        SELECT c.chatId, c.itemId, i.itemName
+        SELECT 
+            c.chatId AS chatId, 
+            c.itemId AS itemId, 
+            i.itemName AS itemName, 
+            i.fileRealName AS itemImagePath  <!-- 이미지 경로 추가 -->
         FROM Chat c
-        JOIN Item i ON c.itemId = i.itemId  -- Item 테이블에서 itemName 가져오기
+        JOIN Item i ON c.itemId = i.itemId  <!-- 아이템 이름 및 이미지 가져오기 -->
         WHERE i.itemId IN (SELECT itemId FROM Participation WHERE userId = #{userId})
-           OR c.itemId IN (SELECT itemId FROM Item WHERE userId = #{userId}) -- 사용자가 등록한 아이템 포함
+           OR c.itemId IN (SELECT itemId FROM Item WHERE userId = #{userId}) <!-- 사용자가 등록한 아이템 포함 -->
         ORDER BY c.chatId DESC
     </select>
 
@@ -28,7 +32,11 @@
     
     <!-- 특정 ChatRoom 가져오기 -->
     <select id="findChatRoomById" resultType="model.domain.Chat">
-        SELECT c.chatId, c.itemId, i.itemName
+        SELECT 
+            c.chatId AS chatId, 
+            c.itemId AS itemId, 
+            i.itemName AS itemName, 
+            i.fileRealName AS itemImagePath  <!-- 이미지 경로 추가 -->
         FROM Chat c
         JOIN Item i ON c.itemId = i.itemId
         WHERE c.chatId = #{chatId}

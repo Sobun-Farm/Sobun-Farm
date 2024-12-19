@@ -11,13 +11,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- 뒤로가기 버튼 -->
-        <div class="back-button-container">
-            <button type="button" class="back-button" onclick="history.back()">
-                <img src="<%=request.getContextPath()%>/images/back-button.png" alt="뒤로가기" />
-            </button>
-        </div>
-
         <form action="<%=request.getContextPath()%>/detail" method="post" class="edit-form">
             <!-- 물품명 -->
             <div class="form-group">

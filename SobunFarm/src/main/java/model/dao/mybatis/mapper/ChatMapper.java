@@ -13,6 +13,6 @@ public interface ChatMapper {
     // 마지막 메시지 업데이트
     void updateLastMessage(int chatId, String lastMessage);
     
-    // 특정 채팅방 조회 (추가)
+    // 특정 채팅방 조회
     Chat findChatRoomById(long chatId);
 }

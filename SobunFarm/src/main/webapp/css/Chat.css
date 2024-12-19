@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 /* 공통 스타일 */
 * {
   margin: 0;
@@ -127,12 +125,13 @@ nav ul li a img {
 }
 
 /* main chat부분 */
-
-/* main chat 부분 */
 .container {
   display: flex;
   padding-top: 120px;
 }
+
+/*왼쪽 부분 */
+
 
 .chat-list {
   width: 30%;
@@ -168,6 +167,30 @@ nav ul li a img {
   border-radius: 5px;
 }
 
+
+/* 선택된 채팅방 스타일 */
+.chat-room-selected {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #0fa958;
+  border-radius: 8px;
+  background-color: #d3e898;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.chat-room-selected img {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+
+/* 오른쪽 부분 */
 .chat-content {
   width: 70%;
   padding: 20px;
@@ -175,14 +198,6 @@ nav ul li a img {
   height: 100vh;
 }
 
-.messages {
-  max-height: 500px;
-  overflow-y: auto;
-  background-color: #fdfdfd;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 10px;
-}
 
 .messages_input {
   display: flex; /* 요소를 가로로 배치 */
@@ -232,8 +247,8 @@ nav ul li a img {
 .exit-button {
   display: inline-block;
   margin-bottom: 10px;
-  width: 150px;
-  height: 50px;
+  width: 200px;
+  height: 30px;
   background-color: #e57373; /* 나가기 버튼 색상 */
   color: white;
   border: none;
@@ -242,7 +257,6 @@ nav ul li a img {
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;
-  padding: 10px;
 }
 
 .exit-button:hover {

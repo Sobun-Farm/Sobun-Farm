@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOMContentLoaded 실행됨!"); // 페이지 로드 확인용 로그
+  console.log("DOMContentLoaded 실행됨!");
 
-  // DOM 요소 가져오기
   const emailInput = document.getElementById("email");
   const emailCheckButton = document.getElementById("email-check");
   const nicknameInput = document.getElementById("nickname");
@@ -24,12 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 이메일 중복 확인 함수
   async function checkEmailDuplicate() {
-    console.log("이메일 중복 확인 함수 실행"); // 확인 로그
+    console.log("이메일 중복 확인 함수 실행");
     const email = emailInput.value.trim();
 
     if (!email) {
       alert("이메일을 입력해주세요.");
-      console.log("이메일이 입력되지 않았습니다."); // 로그 추가
+      console.log("이메일이 입력되지 않았습니다.");
       return;
     }
 
@@ -44,9 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
         )}`
       );
 
-      const data = await response.json(); // JSON 파싱
+      const data = await response.json();
 
-      console.log("서버 응답 데이터:", data); // 서버 응답 로그 출력
+      console.log("서버 응답 데이터:", data);
 
       if (data.available) {
         alert("사용 가능한 이메일입니다.");
@@ -61,12 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 닉네임 중복 확인 함수
   async function checkNicknameDuplicate() {
-    console.log("닉네임 중복 확인 함수 실행"); // 함수 실행 로그
+    console.log("닉네임 중복 확인 함수 실행");
     const nickname = nicknameInput.value.trim();
 
     if (!nickname) {
       alert("닉네임을 입력해주세요.");
-      console.log("닉네임이 입력되지 않았습니다."); // 로그 추가
+      console.log("닉네임이 입력되지 않았습니다.");
       return;
     }
 
@@ -94,13 +93,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 비밀번호 확인 함수
   function validatePasswordOnSubmit(event) {
-    console.log("비밀번호 확인 함수 실행"); // 함수 실행 로그
+    console.log("비밀번호 확인 함수 실행");
     const password = passwordInput.value.trim();
     const confirmPassword = passwordConfirmInput.value.trim();
 
     if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
-      event.preventDefault(); // 폼 제출 중단
+      event.preventDefault();
       return false;
     }
     return true;

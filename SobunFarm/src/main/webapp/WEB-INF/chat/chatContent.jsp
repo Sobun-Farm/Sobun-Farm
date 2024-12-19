@@ -14,46 +14,89 @@
     <title>채팅방 내용</title>
     
     <style>
-        .messages {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .message {
-            margin-bottom: 10px;
-        }
-        .message .sender {
-            font-weight: bold;
-        }
-        .message .message-content {
-            background-color: #e8f5e9;
-            padding: 8px;
-            border-radius: 8px;
-            display: inline-block;
-        }
+    
+      .messagebox{
+         width : 100%;
+         height : 520px;
+         background-color: #f8f8f8;
+           border: 1px solid #d3e898;
+           overflow-y : scroll;
+          
+      }
+      
+       .message {
+         margin-bottom: 10px;
+      }
+       
+        .message-content {
+          padding: 8px;
+          border-radius: 8px;
+          display: inline-block;
+          font-size: 14px;
+      }
+      
+      .input {
+           outline: none;
+      }
+
     </style>
 </head>
-<body>
+<body onLoad="scrollToBottom();";>
+<div class="space">
 <% if ("-1".equals(chatId)) { %>
     <!-- chatId가 유효하지 않을 때 표시할 내용 -->
     <div class="error-message">
-        <h3>유효하지 않은 채팅방입니다. 다시 시도해 주세요.</h3>
+        <img src="${pageContext.request.contextPath}/images/noChat.png" alt="채팅방 없음 이미지">
+
         
     </div>
 <% } else { %>
-    <h3>채팅방C: ${chatId}</h3> <!-- 채팅방 ID 표시 -->
+    <h3>채팅방: ${itemName}</h3> <!-- 채팅방 이름 출력 -->
 
-    <div class="messages">
-       <c:forEach var="message" items="${messageList}">
-           <div class="message">
-               <span class="sender">${message.sender}</span>: <!-- 메시지 보낸 사람 -->
-               <span class="message-content">${message.content}</span> <!-- 메시지 내용 -->
-               <span class="timestamp">${message.timestamp}</span> <!-- 메시지 전송 시간 -->
-           </div>
-       </c:forEach>
-   </div>
-   
-   
+    <div class="messagebox" id="messagesContainer">
+
+        <c:forEach var="message" items="${messageList}">
+            <c:choose>
+                <c:when test="${sessionScope.userId == message.userId}">
+                    <!-- 로그인한 사용자의 메시지 -->
+                    <div class="message" style="text-align: right;">
+                        <span class="message-content" style="background-color: #FBC6A0;">${message.content}</span>
+                       <span class="timestamp">${message.formattedTimestamp}</span>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <!-- 다른 사용자의 메시지 -->
+                    <div class="message" style="text-align: left;">
+                        <span class="sender">${message.sender}</span>
+                       <span class="message-content" style="background-color: #E7F1B6;">${message.content}</span>
+                       <span class="timestamp">${message.formattedTimestamp}</span>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+
+    </div>
+ </div>   
+
     <script>
+       
+    
+       // 페이지 로드 시 메시지 영역을 가장 아래로 스크롤
+       function scrollToBottom() {
+           const messagesContainer = document.getElementById('messagesContainer');
+           //alert(messagesContainer.scrollTop);
+           //alert(messagesContainer.scrollHeight);
+           messagesContainer.scrollTop = messagesContainer.scrollHeight;
+       }
+   
+       // 페이지 로드 후 바로 스크롤 실행
+       //window.onload = function() {
+           //scrollToBottom();
+           //let mySpace = document.getElementById("messagesContainer");
+           //mySpace.scrollTop = mySpace.scrollHeight;
+       //};
+
+       
        
        setTimeout(function() {
            location.reload();

@@ -15,11 +15,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import model.utils.MyBatisUtils;
 public class UserDAO {
 
-    private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb"; // Oracle DB URL
-    private final String DB_USER = "dbp240201"; // DB 사용자명
-    private final String DB_PASSWORD = "111135"; // DB 비밀번호
+    private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb";
+    private final String DB_USER = "dbp240201";
+    private final String DB_PASSWORD = "111135";
     
     public byte[] getProfileImageAsBytes(Long userId) throws SQLException {
         Connection conn = null;
@@ -49,7 +51,7 @@ public class UserDAO {
         return null;
     }
     
-    //이미지
+    // 이미지
     public InputStream getProfileImage(Long userId) throws SQLException {
         Connection conn = null;
         PreparedStatement psmt = null;
@@ -97,8 +99,7 @@ public class UserDAO {
         }
     }
 
-    
-    //유저 이름
+    // 유저 이름
     public String findNicknameByUserId(Long userId) {
         String sql = "SELECT NICKNAME FROM APPUSER WHERE USERID = ?";
         String nickname = null;
@@ -121,7 +122,7 @@ public class UserDAO {
         return nickname;
     }
     
-    //성공소분수
+    // 성공소분수
     public int getSuccessfulTransaction(String email) throws Exception {
         String query = "SELECT SUCCESSFULTRANSACTIONS FROM APPUSER WHERE EMAIL = ?";
         int successfulTransaction = 0;
@@ -133,7 +134,7 @@ public class UserDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    successfulTransaction = rs.getInt("SUCCESSFULTRANSACTIONS"); // 컬럼 값 가져오기
+                    successfulTransaction = rs.getInt("SUCCESSFULTRANSACTIONS");
                 }
             }
         } catch (SQLException e) {
@@ -141,10 +142,8 @@ public class UserDAO {
             throw new Exception("성공 거래 수 조회 실패", e);
         }
 
-        return successfulTransaction; // 조회된 성공 거래 수 반환
+        return successfulTransaction;
     }
-
-    
     
     //지역 수정
     public String getRegionByEmail(String email) throws Exception {
@@ -159,7 +158,7 @@ public class UserDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    region = rs.getString("region"); // region 값 가져오기
+                    region = rs.getString("region");
                 }
             }
         } catch (SQLException e) {
@@ -167,8 +166,9 @@ public class UserDAO {
             throw new Exception("지역 정보 조회 실패", e);
         }
 
-        return region; // 조회한 region 값 반환
+        return region;
     }
+    
     public void updateRegion(String email, String region) throws Exception {
         String query = "UPDATE APPUSER SET REGION = ? WHERE EMAIL = ?";
         try (
@@ -185,7 +185,7 @@ public class UserDAO {
         }
     }
     
-    //소개글 수정
+    // 소개글 수정
     public void updateTextBox(String email, String newText) {
         String sql = "UPDATE APPUSER SET TEXTBOX = ? WHERE EMAIL = ?";
 
@@ -193,38 +193,34 @@ public class UserDAO {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement(sql)
         ) {
-            // 파라미터 설정
             pstmt.setString(1, newText);
             pstmt.setString(2, email);
-
-            // SQL 실행
+            
             pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("DB 업데이트 중 오류 발생: " + e.getMessage(), e);
         }
     }
+    
     public String getTextBox(String email) {
     	String sql = "SELECT TEXTBOX FROM APPUSER WHERE EMAIL = ?";
     	String text = null;
     	
     	try (
-    	        // 데이터베이스 연결
     			Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-    	        // SQL 실행 준비
+    			
     	        PreparedStatement pstmt = conn.prepareStatement(sql)
     	    ) {
-    	        // 이메일 파라미터 설정
     	        pstmt.setString(1, email);
 
-    	        // 쿼리 실행
     	        try (ResultSet rs = pstmt.executeQuery()) {
     	            if (rs.next()) {
     	            	text = rs.getString(1);   	            
     	            }
     	        }
     	    } catch (Exception e) {
-    	        e.printStackTrace(); // 예외 출력
+    	        e.printStackTrace();
     	    }
 
     	    return text;
@@ -232,7 +228,6 @@ public class UserDAO {
 
     public UserDAO() {
         try {
-            // Oracle JDBC 드라이버 로드
             Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Oracle JDBC 드라이버 로드 실패", e);
@@ -381,7 +376,6 @@ public class UserDAO {
 
            if (rs.next()) {
                return new User(
-            		   //나희 추가
             	   rs.getLong("userId"),
                    rs.getString("email"),
                    rs.getString("nickname"),
@@ -408,7 +402,6 @@ public class UserDAO {
 
            if (rs.next()) {
                return new User(
-            		   //나희 추가
             	   rs.getLong("userId"),
                    rs.getString("email"),
                    rs.getString("nickname"),
@@ -421,7 +414,17 @@ public class UserDAO {
        }
 
        return null;
+       
+       
    }
    
-  
+   // userId로 사용자 정보 가져오기. 이건 매퍼사용! 꼬일까봐 하나 더 추가함
+   public User getUserById(long userId) {
+    SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession();
+    try {
+        return session.selectOne("model.dao.mybatis.mapper.UserMapper.getUserById", userId);
+    } finally {
+        session.close();
+    }
+   }
 }

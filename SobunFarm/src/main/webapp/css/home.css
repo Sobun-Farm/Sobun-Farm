@@ -248,7 +248,8 @@ main {
 }
 
 .product-card img {
-  width: 100%;
+  width: 205px;
+  height: 170px;
   border-radius: 20px;
   margin-bottom: 10px;
   border: 2px solid black;

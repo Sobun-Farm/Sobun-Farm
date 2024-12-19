@@ -30,7 +30,7 @@ public class ChatDAO {
         try (SqlSession session = MyBatisSessionFactory.getSqlSession()) {
             ChatMapper mapper = session.getMapper(ChatMapper.class);
             mapper.updateLastMessage(chatId, lastMessage);
-            session.commit();  // 커밋
+            session.commit();
         }
     }
     

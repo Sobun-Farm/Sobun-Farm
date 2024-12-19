@@ -18,7 +18,7 @@ public class MessageManager {
             return messages;
         } catch (Exception e) {
             logger.error("채팅방 {} 메시지 조회 실패: {}", chatId, e.getMessage());
-            throw new RuntimeException("메시지 조회 실패", e); // 예외 발생 시 런타임 예외를 던짐
+            throw new RuntimeException("메시지 조회 실패", e);
         }
     }
 
@@ -29,7 +29,7 @@ public class MessageManager {
             logger.info("메시지 전송 성공: {}", message.getContent());
         } catch (Exception e) {
             logger.error("메시지 전송 실패: {}", e.getMessage());
-            throw new RuntimeException("메시지 전송 실패", e); // 예외 발생 시 런타임 예외를 던짐
+            throw new RuntimeException("메시지 전송 실패", e);
         }
     }
 }

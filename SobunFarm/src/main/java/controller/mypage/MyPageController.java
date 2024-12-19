@@ -24,10 +24,10 @@ public class MyPageController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession(false); // 기존 세션 가져오기 (없으면 null 반환)
+        HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("userId") == null) {
             response.sendRedirect(request.getContextPath() + "/user?action=loginPage");
-            return null; // 리다이렉트 이후 null 반환
+            return null;
         }
 
         Long userId = (Long) session.getAttribute("userId");
@@ -36,7 +36,7 @@ public class MyPageController implements Controller {
         // 세션에 저장된 사용자 정보가 없는 경우 리다이렉트
         if (userId == null || email == null) {
             response.sendRedirect(request.getContextPath() + "/user?action=loginPage");
-            return null; // 리다이렉트 이후 null 반환
+            return null;
         }
 
         UserManager umanager = UserManager.getInstance();
@@ -94,10 +94,9 @@ public class MyPageController implements Controller {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "마이페이지 로드 중 문제가 발생했습니다.");
-            return "/error.jsp"; // 에러 페이지로 이동
+            return "/error.jsp";
         }
 
-        // 정상적으로 마이페이지로 이동
         return "/MainPage.jsp";
     }
 }

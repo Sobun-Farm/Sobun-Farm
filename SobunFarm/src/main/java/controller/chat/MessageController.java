@@ -1,5 +1,7 @@
 package controller.chat;
 
+import model.dao.mybatis.ChatDAO;
+import model.domain.Chat;
 import model.domain.Message;
 import model.service.MessageManager;
 import controller.Controller;
@@ -50,8 +52,14 @@ public class MessageController implements Controller {
             // 메시지 목록을 가져와서 request에 설정
             List<Message> messages = messageManager.getMessagesByChatId(chatId);
             
+            
+            // 채팅방 정보 가져오기 (itemName 포함)
+            Chat chatRoom = new ChatDAO().findChatRoomById(chatId); // ChatDAO 호출
+            String itemName = (chatRoom != null) ? chatRoom.getItemName() : "알 수 없는 채팅방";
+            
             request.setAttribute("chatId", chatId);
             request.setAttribute("messageList", messages);
+            request.setAttribute("itemName", itemName);
             
             logger.error("get으로 내용 나옴");
             // 채팅방 내용 페이지로 포워딩

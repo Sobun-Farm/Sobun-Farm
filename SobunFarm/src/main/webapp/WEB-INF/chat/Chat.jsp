@@ -15,18 +15,15 @@
             <!-- 왼쪽: 채팅방 목록 -->
             <div class="chat-list">
                 <h2>채팅방 목록</h2>
+                <br>
                 <c:choose>
                    <c:when test="${not empty chatRoomList}">
-                      <c:forEach var="chatRoom" items="${chatRoomList}">
-                         
-                         
-                         <div class="chat-room" onclick="selectChatRoom('${chatRoom.chatId}');">
-                               <img src="${pageContext.request.contextPath}/images/testItem.jpg" alt="아이템 이미지">
-                               <h3>${chatRoom.itemName}</h3> <!-- ChatRoom 객체에서 itemName을 가져옴 -->
-                               <p>아이디: ${chatRoom.chatId}</p> <!-- chatId를 클릭하면 해당 채팅방을 선택한 후 iframe에서 로드 -->
-                           </div>
-                           
-                  </c:forEach>
+                    <c:forEach var="chatRoom" items="${chatRoomList}">
+    <div class="chat-room${param.chatId == chatRoom.chatId ? '-selected' : ''}" onclick="selectChatRoom('${chatRoom.chatId}');">
+        <img src="${pageContext.request.contextPath}/uploaded/${chatRoom.itemImagePath != null ? chatRoom.itemImagePath : 'default.png'}" alt="아이템 이미지" />
+        <h3>${chatRoom.itemName}</h3>
+    </div>
+</c:forEach>
                </c:when>
                
                <c:otherwise>
@@ -40,20 +37,21 @@
             <!-- 오른쪽: 선택된 채팅방의 채팅 내용 -->
             <div class="chat-content">
             <div>
-               <button class="exit-button" onclick="exitChat()">채팅방 나가기</button> <!-- 채팅방 나가기 버튼 -->
+               <button class="exit-button" onclick="exitChat()">채팅방 목록보기</button> <!-- 채팅방 나가기 버튼 -->
             </div>
-                <div class="messages">
-                    <iframe id="chatListFrame" name="chatListFrame" src="/chatContent?chatId=${param.chatId}" width="100%" height="100%">
-                    </iframe>
-                </div>
+            
+                
+                    <iframe id="chatListFrame" name="chatListFrame" src="/chatContent?chatId=${param.chatId}" width="100%" height="70%"></iframe>
                
             <!-- 메세지 입력 -->
                 <div class="messages_input">
-                <form action="${pageContext.request.contextPath}/chatContent" method="post" target="chatListFrame">
-                    <input type="hidden" name="chatId" value="${param.chatId}">
-                    <input type="text" name="messageContent" placeholder="메시지를 입력하세요" required>
-                    <button type="submit">전송</button>
-                </form>
+                <form name="msgForm" action="${pageContext.request.contextPath}/chatContent" method="post" target="chatListFrame" >
+                   <input type="hidden" name="chatId" value="${param.chatId}">
+                   <input id="messageInput" type="text" name="messageContent" placeholder="메시지를 입력하세요" required onkeyup="enterkey();">
+                   <button type="button" onClick="submitMsg();">전송</button>
+                   <input type="text" name="dummy" size="2" style="display: none;" />
+               </form>
+
             </div>
          
 
@@ -78,7 +76,22 @@
            document.location.href = "${pageContext.request.contextPath}/chat";
        }
         
+        function enterkey() {
+           if (window.event.keyCode == 13) {
+               // 엔터키가 눌렸을 때
+              document.msgForm.submit();
+               // input 필드 값을 초기화
+                document.getElementById('messageInput').value = '';
+            }
+        }
         
+
+        function submitMsg() {
+           document.msgForm.submit();
+           // input 필드 값을 초기화
+            document.getElementById('messageInput').value = '';
+        }
+
     </script>
 </body>
 </html>

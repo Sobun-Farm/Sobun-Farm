@@ -1,20 +1,19 @@
 package model.domain;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Message {
-    private long messageId;  // 메시지 ID (DB에서 자동 생성)
-    private long chatId;     // 채팅방 ID
-    private long userId;     // 사용자 ID
-    private String content;  // 메시지 내용
-    private LocalDateTime timestamp;  // 메시지 전송 시간
+    private long messageId; // 메시지 ID (DB에서 자동 생성)
+    private long chatId; // 채팅방 ID
+    private long userId; // 사용자 ID
+    private String content; // 메시지 내용
+    private LocalDateTime timestamp; // 메시지 전송 시간
     
-    private String sender;  // 메시지를 보낸 사람의 닉네임
+    private String sender; // 메시지를 보낸 사람의 닉네임
 
-    // 기본 생성자
     public Message() {}
 
-    // 생성자
     public Message(long chatId, long userId, String content, LocalDateTime timestamp) {
         this.chatId = chatId;
         this.userId = userId;
@@ -22,7 +21,6 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    // Getter만 제공 (Setter 제거)
     public long getMessageId() {
         return messageId;
     }
@@ -65,5 +63,11 @@ public class Message {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+    
+    // 포맷된 timestamp 반환
+    public String getFormattedTimestamp() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
+        return timestamp.format(formatter);
     }
 }

@@ -96,7 +96,6 @@ public class UserController implements Controller {
     
     // 회원가입
     private String handleRegistration(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	//수정
     	String userIdStr = request.getParameter("userId");
     	Long userId = userIdStr != null ? Long.valueOf(userIdStr) : null;
         String email = request.getParameter("email");
@@ -136,7 +135,6 @@ public class UserController implements Controller {
         String password = request.getParameter("password");
 
         try {
-        	//나희 추가
         	User user = userManager.login(email, password);
         	if (user == null || user.getUserId() == null) {
                 throw new UserNotFoundException("사용자를 찾을 수 없습니다.");
@@ -147,7 +145,6 @@ public class UserController implements Controller {
             // 세션에 로그인 정보 저장
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", email);
-            //나희 추가
             session.setAttribute("userId", user.getUserId());
             
             return "redirect:/user?action=homePage";
@@ -169,7 +166,7 @@ public class UserController implements Controller {
 
         response.setContentType("application/json");
         response.getWriter().write(jsonResponse.toString());
-        return null; // JSON 응답만 반환
+        return null;
     }
     
     // 닉네임 중복체크

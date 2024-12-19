@@ -14,5 +14,4 @@ public interface UserMapper {
     int isNicknameExists(String nickname);
 
     void insertUser(User user);
-    
 }

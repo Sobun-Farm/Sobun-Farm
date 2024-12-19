@@ -10,10 +10,9 @@ public class ItemGroupDAO {
     // 아이템 그룹 등록
     public void insertItemGroup(ItemGroup itemGroup) {
         try (SqlSession session = MyBatisUtils.getSqlSession()) {
-            // ItemGroupMapper를 통해 insert 실행
             ItemGroupMapper mapper = session.getMapper(ItemGroupMapper.class);
-            mapper.insertItemGroup(itemGroup);  // MyBatis 매퍼의 insertItemGroup 호출
-            session.commit(); // 커밋
+            mapper.insertItemGroup(itemGroup);
+            session.commit();
         } catch (Exception e) {
             throw new RuntimeException("ItemGroup 등록 중 오류 발생", e);
         }

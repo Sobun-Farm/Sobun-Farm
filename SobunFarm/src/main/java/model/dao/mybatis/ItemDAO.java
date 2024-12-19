@@ -18,9 +18,9 @@ import java.util.Map;
 
 public class ItemDAO {
 	//지우 추가
-	private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb"; // Oracle DB URL
-    private final String DB_USER = "dbp240201"; // DB 사용자명
-    private final String DB_PASSWORD = "111135"; // DB 비밀번호
+	private final String DB_URL = "jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb";
+    private final String DB_USER = "dbp240201";
+    private final String DB_PASSWORD = "111135";
 
     public ItemDAO() {
         try {
@@ -31,7 +31,7 @@ public class ItemDAO {
         }
     }
     
-    //참여중인 소분
+    // 참여중인 소분
     public List<Item> findParticipationItemByUserId(Long userId) {
         String sql = "SELECT I.* " +
                      "FROM ITEM I " +
@@ -47,23 +47,21 @@ public class ItemDAO {
             stmt.setLong(1, userId);
             ResultSet rs = stmt.executeQuery();
 
-            // ResultSet의 모든 행을 순회
             while (rs.next()) {
                 Item item = new Item(
-                    rs.getLong("ITEMID"),              // itemId
-                    rs.getString("TITLE"),            // title
-                    rs.getString("ITEMNAME"),         // itemName
-                    rs.getDouble("PRICE"),            // price
-                    rs.getInt("PARTICIPANTSCOUNT"),    // participantsCount 
-                    rs.getInt("MAXPARTICIPANT"),     // maxParticipant
-                    rs.getBoolean("ISJOINABLE"),      // isJoinable
-                    rs.getString("REGION"),           // region
-                    rs.getString("CATEGORY"),         // category
-                    rs.getString("DESCRIPTION"),      // description
-                    rs.getDate("DEADLINE"),           // deadline
-                    rs.getString("ITEMSTATUS"),       // itemStatus
-                    rs.getLong("USERID"),            // userId
-                    rs.getString("PURCHASELOCATION"),  // purchaseLocation
+                    rs.getLong("ITEMID"),
+                    rs.getString("TITLE"),
+                    rs.getString("ITEMNAME"),
+                    rs.getDouble("PRICE"),
+                    rs.getInt("MAXPARTICIPANT"),
+                    rs.getBoolean("ISJOINABLE"),
+                    rs.getString("REGION"),
+                    rs.getString("CATEGORY"),
+                    rs.getString("DESCRIPTION"),
+                    rs.getDate("DEADLINE"),
+                    rs.getString("ITEMSTATUS"),
+                    rs.getLong("USERID"),
+                    rs.getString("PURCHASELOCATION"),
                     null
                 );
                 items.add(item); // 리스트에 아이템 추가
@@ -76,9 +74,7 @@ public class ItemDAO {
         return items; // 모든 아이템 반환
     }
 
-
-    
-    //나의 소분
+    // 나의 소분
     public List<Item> findItemsByUserId() {
         String sql = "SELECT * FROM ITEM"; // OWNERID가 userId인 아이템 검색
         List<Item> items = new ArrayList<>();
@@ -89,20 +85,19 @@ public class ItemDAO {
 
             while (rs.next()) {
                 Item item = new Item(
-                    rs.getLong("ITEMID"),              // itemId
-                    rs.getString("TITLE"),            // title
-                    rs.getString("ITEMNAME"),         // itemName
-                    rs.getDouble("PRICE"),            // price
-                    rs.getInt("PARTICIPANTSCOUNT"),    // participantsCount
-                    rs.getInt("MAXPARTICIPANT"),     // maxParticipant
-                    rs.getBoolean("ISJOINABLE"),      // isJoinable
-                    rs.getString("REGION"),           // region
-                    rs.getString("CATEGORY"),         // category
-                    rs.getString("DESCRIPTION"),      // description
-                    rs.getDate("DEADLINE"),           // deadline
-                    rs.getString("ITEMSTATUS"),       // itemStatus
-                    rs.getLong("USERID"),            // userId
-                    rs.getString("PURCHASELOCATION"),  // purchaseLocation
+                    rs.getLong("ITEMID"),
+                    rs.getString("TITLE"),
+                    rs.getString("ITEMNAME"),
+                    rs.getDouble("PRICE"),
+                    rs.getInt("MAXPARTICIPANT"),
+                    rs.getBoolean("ISJOINABLE"),
+                    rs.getString("REGION"),
+                    rs.getString("CATEGORY"),
+                    rs.getString("DESCRIPTION"),
+                    rs.getDate("DEADLINE"),
+                    rs.getString("ITEMSTATUS"),
+                    rs.getLong("USERID"),
+                    rs.getString("PURCHASELOCATION"),
                     null
                 );
                 items.add(item);
@@ -114,12 +109,7 @@ public class ItemDAO {
         return items;
     }
     
-    /**
-     * 특정 userId를 기준으로 아이템 리스트를 반환
-     *
-     * @param userId 검색할 사용자 ID
-     * @return 아이템 리스트
-     */
+    // 특정 userId를 기준으로 아이템 리스트를 반환
     public List<Item> findItemsByUserId(Long userId) {
         String sql = "SELECT * FROM ITEM WHERE USERID = ?"; // OWNERID가 userId인 아이템 검색
         List<Item> items = new ArrayList<>();
@@ -133,20 +123,19 @@ public class ItemDAO {
 
             while (rs.next()) {
                 Item item = new Item(
-                    rs.getLong("ITEMID"),              // itemId
-                    rs.getString("TITLE"),            // title
-                    rs.getString("ITEMNAME"),         // itemName
-                    rs.getDouble("PRICE"),            // price
-                    rs.getInt("PARTICIPANTSCOUNT"),    // participantsCount
-                    rs.getInt("MAXPARTICIPANT"),     // maxParticipant
-                    rs.getBoolean("ISJOINABLE"),      // isJoinable
-                    rs.getString("REGION"),           // region
-                    rs.getString("CATEGORY"),         // category
-                    rs.getString("DESCRIPTION"),      // description
-                    rs.getDate("DEADLINE"),           // deadline
-                    rs.getString("ITEMSTATUS"),       // itemStatus
-                    rs.getLong("USERID"),            // userId
-                    rs.getString("PURCHASELOCATION"),  // purchaseLocation
+                    rs.getLong("ITEMID"),
+                    rs.getString("TITLE"),
+                    rs.getString("ITEMNAME"),
+                    rs.getDouble("PRICE"),
+                    rs.getInt("MAXPARTICIPANT"),
+                    rs.getBoolean("ISJOINABLE"),
+                    rs.getString("REGION"),
+                    rs.getString("CATEGORY"),
+                    rs.getString("DESCRIPTION"),
+                    rs.getDate("DEADLINE"),
+                    rs.getString("ITEMSTATUS"),
+                    rs.getLong("USERID"),
+                    rs.getString("PURCHASELOCATION"),
                     null
                 );
                 items.add(item);
@@ -188,11 +177,12 @@ public class ItemDAO {
        }
    }
 
+   // 아이템 insert
    public Long insertItem(Item item) {
 	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
 	        ItemMapper mapper = session.getMapper(ItemMapper.class);
 	        mapper.insertItem(item);
-	        session.commit(); // 데이터 삽입 후 커밋
+	        session.commit();
 	        
 	        return item.getItemId(); 
 	        
@@ -201,6 +191,7 @@ public class ItemDAO {
 	    }
 	}
    
+   // 방금 insert한 itemId 가져오기
    public Long getItemId() {
 	    try (SqlSession session = MyBatisUtils.getSqlSession()) {
 	        return session.selectOne("model.dao.mybatis.mapper.ItemMapper.getItemId");
@@ -209,7 +200,31 @@ public class ItemDAO {
 	    }
 	}
    
- //진행소분수
+   // itemId로 물품 정보들 가져오기 
+   public Item getItemById(long itemId) {
+       SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession();
+       try {
+           return session.selectOne("model.dao.mybatis.mapper.ItemMapper.getItemById", itemId);
+       } finally {
+           session.close();
+       }
+   }
+
+   public void deleteItem(long itemId) {
+	    try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
+	        session.delete("model.dao.mybatis.mapper.ItemMapper.deleteItem", itemId);
+	        session.commit();
+	    }
+	}
+  
+   public void incrementParticipantsCount(long itemId) {
+	    try (SqlSession session = MyBatisUtils.getSqlSessionFactory().openSession()) {
+	        session.update("model.dao.mybatis.mapper.ItemMapper.incrementParticipantsCount", itemId);
+	        session.commit();
+	    }
+	}
+   
+   // 진행소분수
    public int countMyItem(Long userId) {
       String sql = "SELECT COUNT(*) AS TOTAL FROM ITEM WHERE USERID = ?";
       int result = 0;
@@ -225,7 +240,7 @@ public class ItemDAO {
                    result = rs.getInt("TOTAL");
                }
            } catch (Exception e) {
-               e.printStackTrace(); // 예외 처리 (로그 등으로 개선 가능)
+               e.printStackTrace();
            }
       
       return result;
