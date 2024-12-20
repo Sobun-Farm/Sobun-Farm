@@ -29,9 +29,9 @@
 <br><br>
 
 ### 3. 기술 스택
-  |기획·디자인|프론트엔드|백엔드|
-  |:-------------:|:-------------:|:-------------:|
-  |<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">|<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">|<img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white"> <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=OpenAI&logoColor=white"> <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white"> <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">|
+  |기획·디자인|Presentation Layer|Business Layer|Persistence Layer|
+  |:-------------:|:-------------:|:-------------:|:-------------:|
+  |피그마|HTML, CSS, JSP, JS|SQL, JDBC, MyBatis|
   
 <br><br>
  
