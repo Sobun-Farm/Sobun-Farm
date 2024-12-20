@@ -17,7 +17,7 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.region = region;
-        this.textBox = null;//이거
+        this.textBox = null;
     }
 
     public Long getUserId() {
