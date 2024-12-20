@@ -13,6 +13,11 @@
 
 <br>
 
+### 🔨 기술 스택 🔨
+  |기획·디자인|Presentation Layer|Business Layer|Persistence Layer|
+  |:-------------:|:-------------:|:-------------:|:-------------:|
+  |Figma|HTML, CSS, JSP, JS|Java|SQL, JDBC, MyBatis|
+  
 ### 🖥️ 주요 기능 🖥️
 - 회원가입, 로그인, 로그아웃 기능
 - 소분 물품 등록 기능
@@ -38,11 +43,6 @@
 (7) 마이페이지 화면<br>
 <img width="80%" src="https://github.com/user-attachments/assets/287e7312-442f-4199-bf7a-7416fb6ce7b7"/><br><br></b>
 
-
-### 🔨 기술 스택 🔨
-  |기획·디자인|Presentation Layer|Business Layer|Persistence Layer|
-  |:-------------:|:-------------:|:-------------:|:-------------:|
-  |Figma|HTML, CSS, JSP, JS|Java|SQL, JDBC, MyBatis|
 
  
 
