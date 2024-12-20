@@ -17,6 +17,8 @@
   |기획·디자인|Presentation Layer|Business Layer|Persistence Layer|
   |:-------------:|:-------------:|:-------------:|:-------------:|
   |Figma|HTML, CSS, JSP, JS|Java|SQL, JDBC, MyBatis|
+
+  <br>
   
 ### 🖥️ 주요 기능 🖥️
 - 회원가입, 로그인, 로그아웃 기능
