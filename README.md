@@ -14,17 +14,17 @@
 
 ### 2. 화면 구성
 (1) <b>로그인 화면<br>
-<img width="100%" src="https://github.com/user-attachments/assets/6b6df5d6-393a-414e-a81d-b2d8417ea823"/><br><br>
+<img width="80%" src="https://github.com/user-attachments/assets/6b6df5d6-393a-414e-a81d-b2d8417ea823"/><br><br>
 (2) 회원가입 화면<br>
-<img width="100%" src="https://github.com/user-attachments/assets/2a5e8ce7-9bc1-4b85-b1f0-fb9ab64de520"/><br><br>
+<img width="80%" src="https://github.com/user-attachments/assets/2a5e8ce7-9bc1-4b85-b1f0-fb9ab64de520"/><br><br>
 (3) 소분 상세 화면<br>
-<img width="100%" src="https://github.com/user-attachments/assets/b86b5d21-2858-41ff-af00-5b018581c302"/><br><br>
+<img width="80%" src="https://github.com/user-attachments/assets/b86b5d21-2858-41ff-af00-5b018581c302"/><br><br>
 (4) 채팅 화면<br>
-<img width="100%" src="https://github.com/user-attachments/assets/7979ecbc-1d51-40c3-b4f3-0bf2dfe981f2"/><br><br>
+<img width="80%" src="https://github.com/user-attachments/assets/7979ecbc-1d51-40c3-b4f3-0bf2dfe981f2"/><br><br>
 (5) 마이페이지 화면<br>
-<img width="100%" src="https://github.com/user-attachments/assets/287e7312-442f-4199-bf7a-7416fb6ce7b7"/><br><br>
+<img width="80%" src="https://github.com/user-attachments/assets/287e7312-442f-4199-bf7a-7416fb6ce7b7"/><br><br>
 (6) 소분 등록 화면<br>
-<img width="100%" src="https://github.com/user-attachments/assets/caa26155-7b14-4d08-9dbc-a9bbb116bd71"/><br><br></b>
+<img width="80%" src="https://github.com/user-attachments/assets/caa26155-7b14-4d08-9dbc-a9bbb116bd71"/><br><br></b>
 
 <br><br>
 
