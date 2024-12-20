@@ -3,11 +3,11 @@
 
 <br>
 
-### Java 기반의 웹 사이트 : 🌱 소분팜 🌱
+### [Java 기반의 웹 사이트] : 🌱 소분팜 🌱
 - 데이터베이스프로그래밍 과목 최종 프로젝트
 - 자취생과 1인 가구를 위한 물품 소분 및 지역 커뮤니티 플랫폼
 - 팀원: 김나희, 류지우, 이가연, 장하연
-  <br><br>
+  <br>
 
 ### 1. 🖥️ 주요 기능 🖥️
 - 회원가입, 로그인, 로그아웃 기능
@@ -16,7 +16,7 @@
 - 소분 거래 채팅 기능
 - 마이페이지 기능
 
-<br><br>
+<br>
 
 ### 2. 🔎 화면 구성 🔎
 (1) <b>로그인 화면<br>
@@ -32,7 +32,7 @@
 (6) 소분 등록 화면<br>
 <img width="80%" src="https://github.com/user-attachments/assets/caa26155-7b14-4d08-9dbc-a9bbb116bd71"/><br><br></b>
 
-<br><br>
+<br>
 
 ### 3. 기술 스택
   |기획·디자인|Presentation Layer|Business Layer|Persistence Layer|
