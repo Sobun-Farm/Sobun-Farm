@@ -31,7 +31,7 @@
 ### 3. 기술 스택
   |기획·디자인|Presentation Layer|Business Layer|Persistence Layer|
   |:-------------:|:-------------:|:-------------:|:-------------:|
-  |피그마|HTML, CSS, JSP, JS|SQL, JDBC, MyBatis|
+  |Figma|HTML, CSS, JSP, JS|Java|SQL, JDBC, MyBatis|
   
 <br><br>
  
