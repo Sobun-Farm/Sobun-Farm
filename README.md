@@ -38,7 +38,6 @@
 (7) 마이페이지 화면<br>
 <img width="80%" src="https://github.com/user-attachments/assets/287e7312-442f-4199-bf7a-7416fb6ce7b7"/><br><br></b>
 
-<br>
 
 ### 🔨 기술 스택 🔨
   |기획·디자인|Presentation Layer|Business Layer|Persistence Layer|
